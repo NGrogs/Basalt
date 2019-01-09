@@ -3,7 +3,7 @@ pragma solidity ^0.5.0;
 /*** experimental abi v2 - could be used to return structs ***/
 
 contract Basalt {
-    string title = "Basalt - connecting colleges & businesses around the world";
+    string title = "Basalt - connecting colleges & businesses around the world.";
 
     /** mightn't be needed **/
     constructor() public {
