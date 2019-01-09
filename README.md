@@ -8,5 +8,6 @@ This application is my final year software project for IT Carlow under the super
 # Technologies
 - Solidity
 - Web3.js
-- Truffle
+- Truffle / Ganache
 - IPFS
+- Firebase
