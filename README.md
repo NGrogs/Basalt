@@ -11,3 +11,4 @@ This application is my final year software project for IT Carlow under the super
 - Truffle / Ganache
 - IPFS
 - Firebase
+- React JS
