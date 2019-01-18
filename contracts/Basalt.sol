@@ -19,8 +19,6 @@ contract Basalt {
         string phoneNumber;
         string about;
         string location;
-        uint256 gradCount;
-        mapping (uint => Graduate) ListOfGraduates; //replace with a global list and use a variable to link?
         uint256 reviewCount;
         mapping (uint => Review) AllReviews; //replace with global list and use a variable to link?
     }
@@ -36,20 +34,7 @@ contract Basalt {
         string about;
     }
 
-    /** defines the structure for a graduate/student **/
-    struct Graduate {
-        uint id; //overall id and local to college or both????
-        address accountAddress; //will this exist?
-        string firstName;
-        string lastName;
-        string email;
-        bool graduated; //replace with enum?
-        string courseName;
-        string courseCode;        
-        string courseLevel; //replace with enum?
-        uint256 courseStartDate;
-        uint256 courseEndDate;
-    }
+    
 
     /** defines the structure for a review of an institute **/
     struct Review {
@@ -60,11 +45,8 @@ contract Basalt {
 
     mapping (address => Institute) public ListOfInstitutes;
     mapping (address => Business) public ListOfBusinesses;
-    //mapping (address => Graduate) public ListOfGraduates;
     uint256 public InstituteCount;
     uint256 public BusinessCount;
-    uint256 public GlobalGradCount; // yes
-    enum GradStatus {inProgress, graduated} //needs more
     enum ratings {untrustworthy, unknown, trustworthy}
     enum GraduateLevel {Certificate, Higher_Certificate, Diploma, Bachelor, Bacheor_Honours, Master, PhD}
 
@@ -77,14 +59,7 @@ contract Basalt {
     /** Returns a count of all Businesses **/
     function getBusinessCount () public returns (uint256) {
         return BusinessCount;
-    }
-
-    /** Returns a count of all Graduates accross all Institutes **/
-    function getGlobalGradCount () public returns (uint256) {
-        return GlobalGradCount;
-    }
-    
-    
+    }   
     
     modifier instituteOnly {
         // wont work - need loop through institute map and find address = msg.sender?
@@ -129,38 +104,6 @@ contract Basalt {
         ListOfBusinesses[msg.sender] = Business(BusinessCount, msg.sender, _name, _email, _phone, _location, _about);
     }
 
-    /** Allow an institute to add a graduates details **/
-    function addGraduate (
-        string memory _fname,
-        string  memory _lname,
-        string memory _email,
-        bool _graduated,
-        string memory _courseName,
-        string memory _courseCode,
-        string memory _courseLevel,
-        uint256 _courseStart,
-        uint256 _courseEnd
-        //need to add the institute they are being added to 
-    ) 
-        public 
-        ownerOnly 
-    {
-        // ensure owner is one accessing 
-        // ensure institute exists
-        // ensure sender is an institute
-
-        //increment the global count of graduates
-        GlobalGradCount ++;
-
-        // ?? find institute where their address is same as msg.sender?? 
-        uint newGradCount = (ListOfInstitutes[msg.sender].gradCount + 1);
-        //increment the institutes count of graduates
-        ListOfInstitutes[msg.sender].gradCount == newGradCount;
-
-        //add grad to the institutes list of grads
-        ListOfInstitutes[msg.sender].ListOfGraduates[newGradCount] = Graduate(newGradCount, _fname, _lname, _email, _graduated, _courseName, _courseCode, _courseLevel, _courseStart, _courseEnd);
-
-    }
 
     /** Return details of an Institute **/
     function getInstitute (
@@ -197,39 +140,6 @@ contract Basalt {
         return (name, email, phone, about);
     }
 
-    /** Used to display all graduates of a particular institute - IMPOSSIBLE??? **/
-    function listAllGrads () private returns(int) {
-    
-    }
-
-    /** Returns count of an Institutes Graduates **/
-    function getGradCount (address _instituteAddress) private returns(uint256) {
-        return ListOfInstitutes[_instituteAddress].gradCount;
-    }
-
-    /** Used to search a institutes list of graduates for a particular graduate **/
-    function lookUpGrad(
-        address _instituteAddress,
-        address _graduateAddress
-    ) 
-        public 
-        returns (string memory, string memory, string memory, string memory, string memory
-    ) 
-    {
-        string memory fname = ListOfInstitutes[_instituteAddress].ListOfGraduates[_graduateAddress].firstName; //index or address for grad?
-        string memory lname = ListOfInstitutes[_instituteAddress].ListOfGraduates[_graduateAddress].lastName; //index or address for grad?
-        string memory email = ListOfInstitutes[_instituteAddress].ListOfGraduates[_graduateAddress].email; //index or address for grad?
-        string memory courseName = ListOfInstitutes[_instituteAddress].ListOfGraduates[_graduateAddress].courseName; //index or address for grad?
-        string memory courseCode = ListOfInstitutes[_instituteAddress].ListOfGraduates[_graduateAddress].courseCode; //index or address for grad?
-
-        
-
-        //level
-        //graduated?
-
-        //return??
-        return (fname, lname, email, courseName, courseCode);
-    }
 
     /** Used to submit a review for a particular institute **/
     function addreview(address _instituteAddress, string memory _description, uint _rating) public {

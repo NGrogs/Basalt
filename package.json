@@ -1,5 +1,5 @@
 {
-  "name": "Basalt-1.0",
+  "name": "Basalt",
   "version": "1.0.0",
   "description": "Initial attempt at Blockchain project",
   "main": "truffle-config.js",
@@ -8,12 +8,14 @@
   },
   "scripts": {
     "dev": "lite-server",
-    "test": "echo \"Error: no test specified\" && sexit 1"
+    "test": "echo \"Error: no test specified\" && sexit 1",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "author": "ngrogan15@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "4.1.3",
+    "bootstrap": "^4.2.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",
@@ -27,6 +29,13 @@
     "truffle-hdwallet-provider": "^1.0.0-web3one.0"
   },
   "dependencies": {
-    "firebase": "^5.7.2"
+    "babel-preset-react-app": "^7.0.0",
+    "firebase": "^5.7.2",
+    "react": "^16.7.0",
+    "react-bootstrap": "^1.0.0-beta.3",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "style-loader": "^0.23.1"
   }
 }

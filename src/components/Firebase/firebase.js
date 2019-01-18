@@ -1,8 +1,15 @@
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 const config = {
-    apiKey: "AIzaSyAgRgoOqFUmvHy022erltHKM0vUHjmexHw",
-    authDomain: "basalt-b3c19.firebaseapp.com",
-    databaseURL: "https://basalt-b3c19.firebaseio.com",
-    projectId: "basalt-b3c19",
-    storageBucket: "basalt-b3c19.appspot.com",
-    messagingSenderId: "446592087044"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    databaseURL: process.env.databaseURL,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
 };
+
+firebase.initializeApp(config);
+
+export default firebase;
