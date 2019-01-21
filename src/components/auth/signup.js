@@ -32,13 +32,15 @@ class Signup extends Component {
             <div align="center">
                 <h1>Sign Up</h1>
                 <form>
-                    <label> Email </label>
-                    <input value={this.state.email} onChange={this.handleChange} id="email" type="email" name="email" placeholder="Email Address" />
-
-                    <label> Password </label>
-                    <input value={this.state.password} onChange={this.handleChange} id="password" type="password" name="password" placeholder="Password" />
-
-                    <button type="submit" onClick={this.signup}> SIgn Up </button>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label> Email </label>
+                        <input value={this.state.email} onChange={this.handleChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" />
+                    </div>
+                    <div className="form-group" style={{width: "40%"}}>
+                        <label> Password </label>
+                        <input  value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" />
+                    </div>
+                    <button className="btn btn-primary btn-lg" type="submit" onClick={this.signup}> Sign Up </button>
 
                 </form>
             </div>

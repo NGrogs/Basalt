@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import NavigationBar from './components/Nav/NavigationBar';
 import Home from './components/Home/home';
-import Login from './components/auth/login';
-import SignUp from './components/auth/signup';
+import Login from './components/Auth/login';
+import SignUp from './components/Auth/signup';
 
 class App extends Component {
     render() {

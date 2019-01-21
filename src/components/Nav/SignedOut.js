@@ -5,13 +5,10 @@ import {NavItem} from 'react-bootstrap';
 
 const SignedOut = () => {
     return (
-
         <React.Fragment>
             <NavItem><NavLink to='/login'>Login</NavLink></NavItem>
             <NavItem><NavLink to='/signup'>Sign Up</NavLink></NavItem>
         </React.Fragment>
-
-        
     )
 }
 
