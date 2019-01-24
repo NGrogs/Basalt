@@ -23,7 +23,6 @@ class Login extends Component {
             });
     }
 
-
     /* renders the app */
     render() {
         return (
@@ -39,7 +38,6 @@ class Login extends Component {
                         <input value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" /> 
                     </div>
                     <button className="btn btn-primary btn-lg" type="submit" onClick={this.login}> Login </button>
-
                 </form>
             </div>
         )

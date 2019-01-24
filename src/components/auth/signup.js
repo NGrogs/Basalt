@@ -23,8 +23,8 @@ class Signup extends Component {
             }).then((u) => {console.log(u)}).catch((error)=> {
                 console.log(error);
             });
+        /* TO-DO redirect users to complete profile page (log them in?) */
     }
-
 
     /* renders the app */
     render() {
@@ -41,7 +41,6 @@ class Signup extends Component {
                         <input  value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" />
                     </div>
                     <button className="btn btn-primary btn-lg" type="submit" onClick={this.signup}> Sign Up </button>
-
                 </form>
             </div>
         );
