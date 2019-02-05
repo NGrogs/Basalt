@@ -29,7 +29,7 @@ class Signup extends Component {
     render() {
         return (
             <div align="center">
-                <h1>Sign Up</h1>
+                <h1>Complete Profile</h1>
                 <form>
                     <div className="form-group " style={{width: "40%"}}>
                         <label> Email </label>

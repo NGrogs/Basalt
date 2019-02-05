@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SignedIn from './SignedIn';
 import SignedOut from './SignedOut';
 //import "bootstrap/dist/css/bootstrap.css";
-import {Navbar} from 'react-bootstrap';
+//import {Navbar} from 'react-bootstrap';
 
 const NavigationBar = () => {
     return (

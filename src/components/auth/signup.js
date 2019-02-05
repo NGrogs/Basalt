@@ -24,6 +24,7 @@ class Signup extends Component {
                 console.log(error);
             });
         /* TO-DO redirect users to complete profile page (log them in?) */
+        this.props.history.push('/login')
     }
 
     /* renders the app */

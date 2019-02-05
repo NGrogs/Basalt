@@ -21,6 +21,7 @@ class Login extends Component {
             }).catch((error) => {
                 console.log(error);
             });
+            this.props.history.push('/home')
     }
 
     /* renders the app */
