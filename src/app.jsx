@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import Web3 from 'web3';
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -8,6 +10,7 @@ import Welcome from './components/Home/welcome';
 import Home from './components/Home/home';
 import Login from './components/Auth/login';
 import SignUp from './components/Auth/signup';
+import Dapptest from './components/Dapp/DappTest';
 
 class App extends Component {
     render() {
@@ -20,6 +23,7 @@ class App extends Component {
                         <Route exact path='/home' component={Home} />
                         <Route exact path='/login' component={Login} /> 
                         <Route exact path='/signup' component={SignUp} />
+                        <Route exact path='/Dapptest' component={Dapptest} />
                     </Switch>
                 </div>
             </BrowserRouter>

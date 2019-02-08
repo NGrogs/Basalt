@@ -10,7 +10,7 @@ class Welcome extends Component {
         return (
             <div align="center"className="container">
                 <h1> Welcome to Basalt </h1>
-                
+                <p> test </p>
                 
             </div>
         )

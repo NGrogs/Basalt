@@ -123,6 +123,7 @@ HexDigit
 /* Tokens */
 
 AsToken         = "as"        !IdentifierPart
+ABIEncoderV2Token = "ABIEncoderV2" !IdentifierPart
 ContractToken   = "contract"  !IdentifierPart
 ExperimentalToken = "experimental" !IdentifierPart
 FromToken       = "from"      !IdentifierPart
@@ -229,6 +230,15 @@ PragmaStatement
       type: "PragmaStatement",
       start_version: "experimental",
       end_version: end_version,
+      start: location().start.offset,
+      end: location().end.offset
+    }
+  }
+  / PragmaToken __ ExperimentalToken __ ABIEncoderV2Token __ EOS {
+    return {
+      type: "PragmaStatement",
+      start_version: "experimental",
+      end_version: "ABIEncoderV2",
       start: location().start.offset,
       end: location().end.offset
     }
