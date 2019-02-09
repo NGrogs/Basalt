@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import Firebase from '../Firebase/firebase';
 
+
+// MAY DEPRECIATE AS COULD BE UNCESSSARY TO CUT INTO 2 PAGES - MAY MERGE WITH SIGNUP PAGE IF POSSIBL
+
+
 class Signup extends Component {
     
         state = {

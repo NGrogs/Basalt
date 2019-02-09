@@ -46,7 +46,7 @@ class Welcome extends Component {
                 <br/><br/><br/><br/>
                 <h2> Contact </h2> <br/>
                 <p>
-                    If you wish to contact me please email me at - ngrogan15@gmail.com <br/>
+                    If you wish to contact me, please email me at - ngrogan15@gmail.com <br/>
                 </p>
             </div>
         )

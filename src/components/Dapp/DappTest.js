@@ -56,8 +56,8 @@ class Dapptest extends Component {
     render() {
         return (
             <div align="center"className="container">
-                <h1> This is Dapp Test </h1>
-                
+                <h1> This is Dapp Test </h1><br/>
+                <p>( Please make sure you give this page access to your MetaMask! )</p>
                 
             </div>
         )
