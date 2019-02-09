@@ -11,6 +11,8 @@ import Home from './components/Home/home';
 import Login from './components/Auth/login';
 import SignUp from './components/Auth/signup';
 import Dapptest from './components/Dapp/DappTest';
+import addStudent from './components/Student/addStudent';
+import viewStudent from './components/Student/viewStudent';
 
 class App extends Component {
     render() {
@@ -24,6 +26,8 @@ class App extends Component {
                         <Route exact path='/login' component={Login} /> 
                         <Route exact path='/signup' component={SignUp} />
                         <Route exact path='/Dapptest' component={Dapptest} />
+                        <Route exact path='/addStudent' component={addStudent} />
+                        <Route exact path='/viewStudent' component={viewStudent} />
                     </Switch>
                 </div>
             </BrowserRouter>

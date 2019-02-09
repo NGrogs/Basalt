@@ -3,10 +3,10 @@ import firebase from '../Firebase/firebase';
 
 class addStudent extends Component {
     state = {
-        name = '',
-        studentNumber = '',
-        courseCode = '',
-        courseName = ''
+        name: '',
+        studentNumber: '',
+        courseCode: '',
+        courseName: ''
     }
 
      /* updates fields when changed */
@@ -23,24 +23,26 @@ class addStudent extends Component {
 
     render() {
         return (
-            <div align="center"className="container">
-                <h1> Add Student page </h1>
-
+            <div align="center">
+                <h1> Add Student page </h1><br/>
                 <form>
-                    <label>Name</label>
-                    <input value={this.state.name} onChange={this.handleChange} id="name" type="text" name="name" placeholder="name" />
-
-                    <label>Student Number</label>
-                    <input value={this.state.studentNumber} onChange={this.handleChange} id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" />
-
-                    <label>Course Code</label>
-                    <input value={this.state.courseCode} onChange={this.handleChange} id="courseCode" type="text" name="courseCode" placeholder="Course Code" />
-
-                    <label>Course Name</label>
-                    <input value={this.state.courseName} onChange={this.handleChange} id="courseName" type="text" name="courseName" placeholder="Course Name" />
-
-                    <label></label>
-
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Name</label>
+                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="name" type="text" name="name" placeholder="name" />
+                    </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Student Number</label>
+                        <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" />
+                    </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Code</label>
+                        <input value={this.state.courseCode} onChange={this.handleChange} className="form-control" id="courseCode" type="text" name="courseCode" placeholder="Course Code" />
+                    </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Name</label>
+                        <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" />
+                    </div>
+                        
                     <button type="submit" onClick={this.createStudent}> Add new student </button>
                 </form>
             </div>
