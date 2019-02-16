@@ -28,5 +28,8 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Pushing of info to firebase database
 - General UI/UX improvements 
 - Add private links in navigation
+- Complete my profile page
+- Add view/retrieve document page
+- Complete view a student page
 
 # Licences
