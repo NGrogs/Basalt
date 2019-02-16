@@ -27,5 +27,6 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Remove bloat 
 - Pushing of info to firebase database
 - General UI/UX improvements 
+- Add private links in navigation
 
 # Licences

@@ -10,7 +10,7 @@ const NavigationBar = () => {
         
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container   ">
-                <Link to='/' className="nav-item"> Basalt</Link>
+                <Link to='/' className="nav-item"><h4>Basalt</h4></Link>
                 <SignedIn />
                 <SignedOut />
             </div>
