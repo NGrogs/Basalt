@@ -10,6 +10,11 @@ class FileUpload extends Component {
         account: '0x0',
         loading: false,
         contractInstance: null,
+
+        StudentName: '',
+        studentNumber: '',
+        courseCode: '',
+        courseName: ''
     }
 
      /* updates fields when changed */
@@ -56,22 +61,30 @@ class FileUpload extends Component {
     render() {
         return (
             <div align="center"className="container">
-                <h1> This is Dapp Test </h1><br/>
+                <h1> File Upload </h1><br/>
                 <p>( Please make sure you give this page access to your MetaMask! )</p>
                 
                 <form>
                     
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="file" type="file" name="file" />
+                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="file" type="file" name="file" required/>
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="name" type="text" name="name" placeholder="Name" />
+                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Number</label>
-                        <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" />
+                        <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
+                    </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Code</label>
+                        <input value={this.state.courseCode} onChange={this.handleChange} className="form-control" id="courseCode" type="text" name="courseCode" placeholder="Course Code" required/>
+                    </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Name</label>
+                        <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
                     </div>
                         
                     <button type="submit" onClick={this.createStudent}> Add Document! </button>

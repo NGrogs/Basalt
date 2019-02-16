@@ -32,11 +32,11 @@ class Login extends Component {
                 <form>
                     <div className="form-group " style={{width: "40%"}}>
                         <label> Email </label>
-                        <input value={this.state.email} onChange={this.handleChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" /> 
+                        <input value={this.state.email} onChange={this.handleChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" required/> 
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label> Password </label>
-                        <input value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" /> 
+                        <input value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" required/> 
                     </div>
                     <button className="btn btn-primary btn-lg" type="submit" onClick={this.login}> Login </button>
                 </form>
