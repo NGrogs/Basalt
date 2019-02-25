@@ -18,7 +18,7 @@ class App extends Component {
         return (
             <React.Fragment>
             <BrowserRouter>
-                <div className="pb-5">
+                <div className="pb-5" style={{marginBottom: "10em"}}>
                     <NavigationBar />
                     <Switch>
                         <Route exact path='/' component={Welcome} />
