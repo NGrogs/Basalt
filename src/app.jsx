@@ -11,12 +11,14 @@ import Login from './components/Auth/login';
 import SignUp from './components/Auth/signup';
 import FileUpload from './components/Dapp/FileUpload';
 import viewStudent from './components/Student/viewStudent';
+import Footer from './components/Home/Footer';
 
 class App extends Component {
     render() {
         return (
+            <React.Fragment>
             <BrowserRouter>
-                <div>
+                <div className="pb-5">
                     <NavigationBar />
                     <Switch>
                         <Route exact path='/' component={Welcome} />
@@ -28,6 +30,8 @@ class App extends Component {
                     </Switch>
                 </div>
             </BrowserRouter>
+            <Footer />
+            </React.Fragment>
         )
     }
 }

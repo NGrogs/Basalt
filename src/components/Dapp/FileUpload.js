@@ -2,19 +2,30 @@ import React, {Component} from 'react';
 import Web3 from 'web3';
 
 const web3 = new Web3("ws://localhost:8546");
+const $ = window.$;
+var contractTruffle = require("truffle-contract");
 
 class FileUpload extends Component {
     state = {
+        // variable for the smart contract and ethereum attributes
         web3Provider: null,
         contracts: {},
         account: '0x0',
-        loading: false,
+        loading: false, //not needed?
         contractInstance: null,
 
+        // variables of student gotten from form
         StudentName: '',
-        studentNumber: '',
-        courseCode: '',
-        courseName: ''
+        StudentNumber: '',
+        CourseCode: '',
+        CourseName: '',
+        // perhaps link the id of the account who pushed the data
+
+        // variables returned from and needed for smart contract
+        IPFSlink: '',
+        idForBlockchain: '',
+
+
     }
 
      /* updates fields when changed */
@@ -22,6 +33,12 @@ class FileUpload extends Component {
         this.setState({ 
             [e.target.id]: e.target.value 
         })
+    }
+
+    init = async () => {
+        await FileUpload.initWeb3()
+        await FileUpload.initContracts()
+        await FileUpload.render()
     }
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -56,19 +73,42 @@ class FileUpload extends Component {
     else {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
     }
+
 }
 
-    render() {
+initContracts = async () => {
+    const contract = await $.getJSON('MyBasalt.json')
+    FileUpload.contracts.MyBasalt = contractTruffle(contract) //weird fix but okay
+    // const myContract = await artifacts.require("MyBasalt").deployed
+    FileUpload.contracts.MyBasalt.setProvider(FileUpload.web3Provider)
+
+    //set account for Blockchain network
+    FileUpload.account = web3.eth.accounts[0]
+
+    const contractBasalt = await FileUpload.contracts.MyBasalt.deployed()
+    FileUpload.contractInstance = contractBasalt
+}
+
+    render = () => { //bad async??
+       /**  set account for Blockchain network
+        FileUpload.account = web3.eth.accounts[0]
+
+        const contract = await FileUpload.contracts.MyBasalt.deployed()
+        FileUpload.contractInstance = contract
+
+*/
+
+
         return (
             <div align="center"className="container">
                 <h1> File Upload </h1><br/>
-                <p>( Please make sure you give this page access to your MetaMask! )</p>
+                <h5>( Please make sure you give this page access to your MetaMask! )</h5>
                 
                 <form>
                     
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="file" type="file" name="file" required/>
+                        <input value={this.state.name} onChange={this.handleChange} className="btn btn-primary btn-lg" id="file" type="file" name="file" required/>
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
@@ -87,13 +127,13 @@ class FileUpload extends Component {
                         <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
                     </div>
                         
-                    <button type="submit" onClick={this.createStudent}> Add Document! </button>
+                    <button className="btn btn-primary btn-lg" type="submit" onClick={this.createStudent}> Add Document! </button>
                 </form>
 
                 <br/><br/><br/><br/>
                 
                 <h1> What information is stored along with your file? </h1> <br/>
-                <p>
+                <h5>
                     Your file is actually stored using Interplanitary File System <a href="https://ipfs.io/"> (IPFS) </a> and 
                     the unique URL is stored on the Ethereum network. <br/>
 
@@ -101,11 +141,17 @@ class FileUpload extends Component {
 
                     We'll store a record of who this file was uploaded for along with the link to the document on 
                     a central database 
-                </p>
+                </h5>
 
             </div>
         )
     }
 }
+
+$( () => {
+    $(window).load(() => {
+    FileUpload.init()
+    })
+})
 
 export default FileUpload;

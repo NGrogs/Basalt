@@ -32,7 +32,7 @@ contract Basalt {
         string phoneNumber;
         string location;
         string about;
-    }
+    } 
 
     
 
