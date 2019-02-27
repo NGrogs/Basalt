@@ -15,11 +15,12 @@
   "author": "ngrogan15@gmail.com",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
     "bootstrap": "^4.3.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",
-    "dotenv": "^4.0.0",
+    "dotenv": "^6.2.0",
     "ganache-cli": "^6.1.8",
     "lite-server": "^2.3.0",
     "nodemon": "^1.18.10",
@@ -29,6 +30,7 @@
     "truffle-hdwallet-provider": "^1.0.4"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "babel-preset-react-app": "^7.0.1",
     "firebase": "^5.8.4",
     "fs-extra": "^7.0.1",
@@ -40,6 +42,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
     "style-loader": "^0.23.1",
+    "typescript": "^3.3.3333",
     "web3": "^1.0.0-beta.46"
   },
   "browserslist": [

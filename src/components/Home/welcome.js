@@ -7,7 +7,7 @@ class Welcome extends Component {
             <div align="center"className="container">
                 <h1> Welcome to Basalt </h1> <br/>
                 
-                <h2> About </h2> <br/>
+                <h2> About </h2>
                 <h5> This application aims to use the Ethereum Blockchain to help connect colleges and businesses
                     around the world. <br/>
 

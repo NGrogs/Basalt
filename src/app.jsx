@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
-
+//var module = require('module').default;
 import 'bootstrap/dist/css/bootstrap.css';
 
 import NavigationBar from './components/Nav/NavigationBar';

@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import Web3 from 'web3';
+import BasaltStoreContract from "./../../contracts/BasaltStore.json";
 
-const web3 = new Web3("ws://localhost:8546");
-const $ = window.$;
-var contractTruffle = require("truffle-contract");
+var web3 = new Web3("http://localhost:8545");
+
 
 class FileUpload extends Component {
     state = {
         // variable for the smart contract and ethereum attributes
         web3Provider: null,
-        contracts: {},
+        contracts: null,
         account: '0x0',
         loading: false, //not needed?
         contractInstance: null,
@@ -35,10 +35,10 @@ class FileUpload extends Component {
         })
     }
 
-    init = async () => {
-        await FileUpload.initWeb3()
-        await FileUpload.initContracts()
-        await FileUpload.render()
+    componentDidMount = async () => {
+        await this.initWeb3()// initWeb3()
+        await this.initContracts() //FileUpload.initContracts()
+        await this.render() //FileUpload.render()
     }
 
     // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
@@ -77,16 +77,28 @@ class FileUpload extends Component {
 }
 
 initContracts = async () => {
-    const contract = await $.getJSON('MyBasalt.json')
+    /*const contract = await $.getJSON('MyBasalt.json')
     FileUpload.contracts.MyBasalt = contractTruffle(contract) //weird fix but okay
-    // const myContract = await artifacts.require("MyBasalt").deployed
-    FileUpload.contracts.MyBasalt.setProvider(FileUpload.web3Provider)
+    //const myContract = await artifacts.require("MyBasalt").deployed
+    FileUpload.contracts.MyBasalt.setProvider(FileUpload.web3Provider)*/
+
+    // Get the contract instance.
+    const networkId = await web3.eth.net.getId();
+    const deployedNetwork = BasaltStoreContract.networks[networkId];
+    const instance = new web3.eth.Contract(
+    BasaltStoreContract.abi,
+    deployedNetwork && deployedNetwork.address,
+    );
+
+    FileUpload.Contract = instance;
+
+    this.account = await web3.defaultAccount;
 
     //set account for Blockchain network
-    FileUpload.account = web3.eth.accounts[0]
+    this.account = await web3.eth.getAccounts();
 
-    const contractBasalt = await FileUpload.contracts.MyBasalt.deployed()
-    FileUpload.contractInstance = contractBasalt
+    //const contractBasalt = await FileUpload.contracts.MyBasalt.deployed();
+    //FileUpload.contractInstance = contractBasalt;
 }
 
     render = () => { //bad async??
@@ -103,12 +115,14 @@ initContracts = async () => {
             <div align="center"className="container">
                 <h1> File Upload </h1><br/>
                 <h5>( Please make sure you give this page access to your MetaMask! )</h5>
+
+                <h4>Your metamask account: {this.state.account[0]}</h4>
                 
                 <form>
                     
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="btn btn-primary btn-lg" id="file" type="file" name="file" required/>
+                        <input value={this.state.name} onChange={this.handleChange} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
@@ -127,7 +141,7 @@ initContracts = async () => {
                         <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
                     </div>
                         
-                    <button className="btn btn-primary btn-lg" type="submit" onClick={this.createStudent}> Add Document! </button>
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.createStudent}> Add Document! </button>
                 </form>
 
                 <br/><br/><br/><br/>
@@ -147,11 +161,5 @@ initContracts = async () => {
         )
     }
 }
-
-$( () => {
-    $(window).load(() => {
-    FileUpload.init()
-    })
-})
 
 export default FileUpload;

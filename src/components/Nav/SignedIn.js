@@ -6,8 +6,8 @@ import {NavItem} from 'react-bootstrap';
 const SignedIn = () => {
     return (
         <React.Fragment>
-            <NavItem><NavLink to='/FileUpload'><h4>FileUpload</h4></NavLink></NavItem>
-            <NavItem><NavLink to='/viewStudent'><h4>View Student</h4></NavLink></NavItem>
+            <NavItem><NavLink to='/FileUpload'><h4 className="text-white">FileUpload</h4></NavLink></NavItem>
+            <NavItem><NavLink to='/viewStudent'><h4 className="text-white">View Student</h4></NavLink></NavItem>
         </React.Fragment>
     )
 }

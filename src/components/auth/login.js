@@ -38,7 +38,7 @@ class Login extends Component {
                         <label> Password </label>
                         <input value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" required/> 
                     </div>
-                    <button className="btn btn-primary btn-lg" type="submit" onClick={this.login}> Login </button>
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.login}> Login </button>
                 </form>
             </div>
         )

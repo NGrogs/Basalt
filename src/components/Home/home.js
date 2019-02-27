@@ -15,8 +15,9 @@ class Home extends Component {
         return (
             <div align="center"className="container">
                 <h1> Home page </h1>
+                <br/><br/>
 
-                <button onClick={this.logout}> Logout </button>
+                <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.logout}> Logout </button>
             </div>
         )
     }
