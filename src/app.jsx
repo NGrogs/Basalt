@@ -10,6 +10,7 @@ import Home from './components/Home/home';
 import Login from './components/Auth/login';
 import SignUp from './components/Auth/signup';
 import FileUpload from './components/Dapp/FileUpload';
+import FileRetrieve from './components/Dapp/FileRetrieve';
 import viewStudent from './components/Student/viewStudent';
 import Footer from './components/Home/Footer';
 
@@ -27,6 +28,7 @@ class App extends Component {
                         <Route exact path='/signup' component={SignUp} />
                         <Route exact path='/FileUpload' component={FileUpload} />
                         <Route exact path='/viewStudent' component={viewStudent} />
+                        <Route exact path='/FileRetrieve' component={FileRetrieve}/>
                     </Switch>
                 </div>
             </BrowserRouter>

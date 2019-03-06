@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import Web3 from 'web3';
-import BasaltStoreContract from "./../../contracts/BasaltStore.json";
+import storehash from '../IPFS/storehash';
+import ipfs from '../IPFS/IPFS';
 
-var web3 = new Web3("http://localhost:8545");
+//var web3 = new Web3("http://localhost:8545");
+
+import getWeb3 from "../utils/getWeb3";
 
 
 class FileUpload extends Component {
@@ -22,7 +24,9 @@ class FileUpload extends Component {
         // perhaps link the id of the account who pushed the data
 
         // variables returned from and needed for smart contract
-        IPFSlink: '',
+        IPFSlink: null,
+        buffer: '',
+        ethAddress: '',
         idForBlockchain: '',
 
 
@@ -35,95 +39,59 @@ class FileUpload extends Component {
         })
     }
 
+    getFile = (e) => {
+        e.preventDefault()
+        const file = e.target.files[0]
+        let reader = new window.FileReader()
+        reader.readAsArrayBuffer(file)
+        reader.onloadend = () => this.convertToBuffer(reader)
+    }
+
+    convertToBuffer = async(reader) => {
+        //file is converted to a buffer for upload to IPFS
+        const buffer = await Buffer.from(reader.result)
+        this.setState({buffer})
+    }
+
+    pushToIPFS = async(e) => {
+        e.preventDefault()
+        await ipfs.add(this.state.buffer, (err, ipfsHash) => {
+            console.log(err, ipfsHash)
+            this.setState({IPFSlink : ipfsHash[0].hash})
+        })
+    }
+
     componentDidMount = async () => {
-        await this.initWeb3()// initWeb3()
-        await this.initContracts() //FileUpload.initContracts()
-        await this.render() //FileUpload.render()
-    }
+    const web3 = await getWeb3();
 
-    // https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
-    initWeb3 = async () => {
-    if (typeof web3 !== 'undefined') {
-        FileUpload.web3Provider = web3.currentProvider
-        web3 = new Web3(web3.currentProvider)
-    } else {
-        window.alert("Please connect to Metamask.")
-    }
-    // Modern dapp browsers...
-  /*  if (window.ethereum) {
-        window.web3 = new Web3(ethereum)
-        try {
-        // Request account access if needed
-        await ethereum.enable()
-        // Acccounts now exposed
-        web3.eth.sendTransaction({/* ... *//*})
-        } catch (error) {
-        // User denied account access...
-        }
-    }
-    // Legacy dapp browsers...
-    else */
-    if (window.web3) {
-        FileUpload.web3Provider = web3.currentProvider
-        window.web3 = new Web3(web3.currentProvider)
-        // Acccounts always exposed
-      web3.eth.sendTransaction({/* ... */})
-    }
-    // Non-dapp browsers...
-    else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
-    }
-
-}
-
-initContracts = async () => {
-    /*const contract = await $.getJSON('MyBasalt.json')
-    FileUpload.contracts.MyBasalt = contractTruffle(contract) //weird fix but okay
-    //const myContract = await artifacts.require("MyBasalt").deployed
-    FileUpload.contracts.MyBasalt.setProvider(FileUpload.web3Provider)*/
-
-    // Get the contract instance.
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = BasaltStoreContract.networks[networkId];
-    const instance = new web3.eth.Contract(
-    BasaltStoreContract.abi,
-    deployedNetwork && deployedNetwork.address,
-    );
-
-    FileUpload.Contract = instance;
-
-    this.account = await web3.defaultAccount;
+    // get contract address
+    const ethAddress = await storehash.options.address
+    this.setState({ethAddress})
 
     //set account for Blockchain network
-    this.account = await web3.eth.getAccounts();
+    this.setState({account: await web3.eth.getAccounts()})
+    }
 
-    //const contractBasalt = await FileUpload.contracts.MyBasalt.deployed();
-    //FileUpload.contractInstance = contractBasalt;
-}
-
-    render = () => { //bad async??
-       /**  set account for Blockchain network
-        FileUpload.account = web3.eth.accounts[0]
-
-        const contract = await FileUpload.contracts.MyBasalt.deployed()
-        FileUpload.contractInstance = contract
-
-*/
-
-
+    render = () => { 
         return (
             <div align="center"className="container">
                 <h1> File Upload </h1><br/>
-                <h5>( Please make sure you give this page access to your MetaMask! )</h5>
+                <h5>Ethereum Contract address: {this.state.ethAddress}</h5> <br/><br/>
 
-                <h4>Your metamask account: {this.state.account[0]}</h4>
+                <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5>
+
+                <h5>Your metamask account: {this.state.account[0]}</h5><br/><br/>
                 
                 <form>
                     
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
+                        <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
                     </div>
+
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Push Document to IPFS </button>
+                    <h5>The IPFS file address: {this.state.IPFSlink}</h5><br/><br/>
+
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
                         <input value={this.state.name} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
@@ -141,7 +109,7 @@ initContracts = async () => {
                         <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
                     </div>
                         
-                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.createStudent}> Add Document! </button>
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Add Document! </button>
                 </form>
 
                 <br/><br/><br/><br/>
