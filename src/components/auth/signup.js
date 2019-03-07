@@ -30,8 +30,8 @@ class Signup extends Component {
     /* renders the app */
     render() {
         return (
-            <div align="center">
-                <h1>Sign Up</h1>
+            <div align="center" style={{marginTop: '7em'}}>
+                <h1>Sign Up</h1><br/><br/>
                 <form>
                     <div className="form-group " style={{width: "40%"}}>
                         <label> Email </label>

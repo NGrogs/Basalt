@@ -27,9 +27,9 @@ class Login extends Component {
     /* renders the app */
     render() {
         return (
-            <div align="center">
-            <h1>Login</h1>
-                <form>
+            <div align="center" style={{marginTop: '7em'}}>
+            <h1>Login</h1><br/><br/>
+                <form >
                     <div className="form-group " style={{width: "40%"}}>
                         <label> Email </label>
                         <input value={this.state.email} onChange={this.handleChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" required/> 
