@@ -13,7 +13,12 @@ class FileRetrieve extends Component {
         loading: false, //not needed?
         contractInstance: null,
 
-
+        // variables of student gotten from form
+        StudentName: '',
+        StudentNumber: '',
+        CourseCode: '',
+        CourseName: '',
+        IPFSlink: null,
     }
 
     /* updates fields when changed */
@@ -21,6 +26,11 @@ class FileRetrieve extends Component {
         this.setState({ 
             [e.target.id]: e.target.value 
         })
+    }
+
+    copy = (e) => {
+        this.IPFSLink.select();
+        document.execCommand('copy')
     }
 
     componentDidMount = async () => {
@@ -55,7 +65,12 @@ class FileRetrieve extends Component {
                 </form>
                 <br/><br/>
 
-                
+                <h2>File details</h2><br/>
+                <h5>Student name: {this.state.StudentName}</h5>
+                <h5>Student number: {this.state.StudentNumber}</h5>
+                <h5>Course code: {this.state.CourseCode}</h5>
+                <h5>Course name: {this.state.CourseName}</h5>
+                <h5>IPFS Link: {this.state.IPFSLink}</h5> <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.CopyLink} > Copy Link! </button>
 
             </div>
         )
