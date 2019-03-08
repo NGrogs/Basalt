@@ -45,31 +45,35 @@ class FileRetrieve extends Component {
     render = () => { 
         return (
             <div align="center"className="container">
-                <h1> File Retrieve </h1><br/>
-                <h5>Ethereum Contract address: {this.state.ethAddress}</h5> <br/><br/>
+                <h1> File Retrieve </h1><br/><br/><br/>
 
-                <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5>
+                <div className="row">
+                <div className="col-sm">
+                    <h2>Ethereum Contract address:</h2><h5> {this.state.ethAddress}</h5> <br/><br/>
+                    <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5>
 
-                <h5>Your metamask account: {this.state.account[0]}</h5><br/><br/>
-                
-                <h2>Enter key to search:</h2>
-                <form>
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>ID:</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="keySearch" type="text" name="keySearch" placeholder="Key" required/>
-                    </div>
+                    <h2>Your metamask account:</h2><h5> {this.state.account[0]}</h5><br/><br/>
+                </div>   
+                <div className="col-sm"> 
+                    <h2>Enter key to search:</h2>
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <label>ID:</label>
+                            <input value={this.state.name} onChange={this.handleChange} className="form-control" id="keySearch" type="text" name="keySearch" placeholder="Key" required/>
+                        </div>
 
-                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" > Find Document! </button>
-                </form>
-                <br/><br/>
-
-                <h2>File details</h2><br/>
-                <h5>Student name: {this.state.StudentName}</h5>
-                <h5>Student number: {this.state.StudentNumber}</h5>
-                <h5>Course code: {this.state.CourseCode}</h5>
-                <h5>Course name: {this.state.CourseName}</h5>
-                <h5>IPFS Link: {this.state.IPFSLink}</h5> <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.CopyLink} > Copy Link! </button>
-
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" > Find Document! </button>
+                    </form>
+                </div>
+                <div className="col-sm">
+                    <h2>File details</h2><br/>
+                    <h5>Student name: {this.state.StudentName}</h5>
+                    <h5>Student number: {this.state.StudentNumber}</h5>
+                    <h5>Course code: {this.state.CourseCode}</h5>
+                    <h5>Course name: {this.state.CourseName}</h5>
+                    <h5>IPFS Link: {this.state.IPFSLink}</h5> <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.CopyLink} > Copy Link! </button>
+                </div>
+                </div>
             </div>
         )
     }

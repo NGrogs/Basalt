@@ -29,5 +29,6 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Complete my profile page
 - Add view/retrieve document page
 - Complete view a student page
+- Fiv navigation to thanks page
 
 # Licences

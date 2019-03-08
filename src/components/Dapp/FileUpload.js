@@ -82,7 +82,7 @@ class FileUpload extends Component {
 
         const db = firebase.database()
         //need to replace uid
-        db.ref().child("students").child(uid).set(
+     /*   db.ref().child("students").child(uid).set(
             {   studentName: _studentName,
                 studentNumber: _studentNumber,
                 courseCode: _courseCode,
@@ -91,7 +91,7 @@ class FileUpload extends Component {
             }
         ).then(
             // return success message
-        )
+        )*/
     }
 
     componentDidMount = async () => {

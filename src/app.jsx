@@ -13,6 +13,7 @@ import FileUpload from './components/Dapp/FileUpload';
 import FileRetrieve from './components/Dapp/FileRetrieve';
 import viewStudent from './components/Student/viewStudent';
 import Footer from './components/Home/Footer';
+import thanks from './components/Home/Thanks';
 
 class App extends Component {
     render() {
@@ -29,6 +30,7 @@ class App extends Component {
                         <Route exact path='/FileUpload' component={FileUpload} />
                         <Route exact path='/viewStudent' component={viewStudent} />
                         <Route exact path='/FileRetrieve' component={FileRetrieve}/>
+                        <Route exact path='/thanks' component={thanks}/>
                     </Switch>
                 </div>
             </BrowserRouter>
