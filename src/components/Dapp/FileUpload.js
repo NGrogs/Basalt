@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
@@ -72,7 +73,25 @@ class FileUpload extends Component {
 
     //TO-DO
     createStudent = async() => {
+        //get student details from state variables
+        var _studentName = this.state.studentName
+        var _studentNumber = this.state.studentNumber
+        var _courseCode = this.state.courseCode
+        var _courseName = this.state.courseName
+        var _idForBlockchain = this.state.idForBlockchain
 
+        const db = firebase.database()
+        //need to replace uid
+        db.ref().child("students").child(uid).set(
+            {   studentName: _studentName,
+                studentNumber: _studentNumber,
+                courseCode: _courseCode,
+                courseName: _courseName,
+                blockchainKey: _idForBlockchain
+            }
+        ).then(
+            // return success message
+        )
     }
 
     componentDidMount = async () => {

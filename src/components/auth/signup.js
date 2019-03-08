@@ -63,30 +63,47 @@ class Signup extends Component {
             <div align="center" style={{marginTop: '7em'}}>
                 <h1>Sign Up</h1><br/><br/>
                 <form>
-                    <div className="form-group " style={{width: "40%"}}>
+                <div className="row">
+                <div className="col-sm">
+                    <div className="form-group " style={{width: "60%"}}>
                         <label> Email </label>
                         <input value={this.state.email} onChange={this.handleChange} className="form-control" id="email" type="email" name="email" placeholder="Email Address" required/>
                     </div>
-                    <div className="form-group" style={{width: "40%"}}>
-                        <label> Password </label>
-                        <input  value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" required/>
-                    </div>
-                    <div className="form-group" style={{width: "40%"}}>
-                        <label> Organization name </label>
-                        <input value={this.state.organizationName} onChange={this.handleChange} className="form-control" id="organizationName" type="text" name="organizationName" placeholder="College/Company Name" required/>
-                    </div>
-                    <div className="form-group" style={{width: "40%"}}>
+                </div>
+                <div className="col-sm">
+                    <div className="form-group" style={{width: "60%"}}>
                         <label> Organization Type </label>
                         <input  value={this.state.organizationType} onChange={this.handleChange} className="form-control" id="organizationType" type="text" name="organizationType" placeholder="Are you a college or a business?" required/>
                     </div>
-                    <div className="form-group" style={{width: "40%"}}>
+                </div>
+                <div className="col-sm">
+                    <div className="form-group" style={{width: "60%"}}>
                         <label> Country </label>
                         <input  value={this.state.country} onChange={this.handleChange} className="form-control" id="country" type="text" name="country" placeholder="What country are you based in?" required/>
+                    </div>                    
+                </div>
+                </div>
+                <div className="row">
+                <div className="col-sm">
+                    <div className="form-group" style={{width: "60%"}}>
+                        <label> Password </label>
+                        <input  value={this.state.password} onChange={this.handleChange} className="form-control" id="password" type="password" name="password" placeholder="Password" required/>
                     </div>
-                    <div className="form-group" style={{width: "40%"}}>
+                </div>
+                <div className="col-sm">
+                    <div className="form-group" style={{width: "60%"}}>
+                        <label> Organization name </label>
+                        <input value={this.state.organizationName} onChange={this.handleChange} className="form-control" id="organizationName" type="text" name="organizationName" placeholder="College/Company Name" required/>
+                    </div>
+                </div>
+                <div className="col-sm">
+                    <div className="form-group" style={{width: "60%"}}>
                         <label> Region / Province </label>
                         <input  value={this.state.region} onChange={this.handleChange} className="form-control" id="region" type="text" name="region" placeholder="What region of the country are you based in?" required/>
                     </div>
+                </div>
+                </div>
+                <br/><br/>
                     <div className="form-group" style={{width: "40%"}}>
                         <label> Public Key of Ethereum wallet </label>
                         <input value={this.state.publicEthKey} onChange={this.handleChange} className="form-control" id="publicEthKey" type="text" name="publicEthKey" placeholder="Your PUBLIC Ethereum wallet key" required/>

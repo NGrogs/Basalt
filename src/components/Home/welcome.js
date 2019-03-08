@@ -7,7 +7,7 @@ class Welcome extends Component {
             <div align="center"className="container" style={{marginTop: '3em'}}>
                 <h1> Welcome to Basalt </h1> <br/><br/><br/>
                 <div className="row">
-                    <div class="col-sm">
+                    <div className="col-sm">
                     <h2 style={{backgroundColor: '#B65DF3', padding: '.2em'}}> About </h2>
                     <h5 style={{textAlign: 'left'}}> This application aims to use the Ethereum Blockchain to help connect colleges and businesses
                         around the world. <br/><br/>
@@ -18,7 +18,7 @@ class Welcome extends Component {
                         This application was created for my final year Software Development project at IT Carlow
                     </h5>
                     </div>
-                    <div class="col-sm">
+                    <div className="col-sm">
                     <h2 style={{backgroundColor: '#B65DF3', padding: '.2em'}}> How will it work?</h2>
                     <h5 style={{textAlign: 'left'}}>
                         A college uploads a document containing details about one of their student. (The information they 
@@ -33,7 +33,7 @@ class Welcome extends Component {
                     
                     </h5>
                     </div>
-                    <div class="col-sm">
+                    <div className="col-sm">
                     <h2 style={{backgroundColor: '#B65DF3', padding: '.2em'}}> What will you need? </h2>
                     <h5 style={{textAlign: 'left'}}> 
                         In order to store and recieve documents from the Ethereum Blockchain you will need to download the browser extension
