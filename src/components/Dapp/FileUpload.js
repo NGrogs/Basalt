@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
-
-//var web3 = new Web3("http://localhost:8545");
-
 import getWeb3 from "../utils/getWeb3";
-
 
 class FileUpload extends Component {
     state = {
@@ -39,6 +35,7 @@ class FileUpload extends Component {
         })
     }
 
+    /* retrieves the file the user uploaded*/
     getFile = (e) => {
         e.preventDefault()
         const file = e.target.files[0]
@@ -47,18 +44,35 @@ class FileUpload extends Component {
         reader.onloadend = () => this.convertToBuffer(reader)
     }
 
+    /* converts file to be suitable to send to IPFS */
     convertToBuffer = async(reader) => {
         //file is converted to a buffer for upload to IPFS
         const buffer = await Buffer.from(reader.result)
         this.setState({buffer})
     }
 
+    /* send the file to IPFS */
     pushToIPFS = async(e) => {
         e.preventDefault()
         await ipfs.add(this.state.buffer, (err, ipfsHash) => {
             console.log(err, ipfsHash)
             this.setState({IPFSlink : ipfsHash[0].hash})
         })
+    }
+
+    /* store IPFS link on blockchain */
+    addToBlockchain = async(e) => {
+        e.preventDefault()
+        //get todays date
+        let newDate = new Date()
+        //call the smart contract method to create a new document
+        const documentId = storehash.methods.sendDocument(this.state.IPFSlink, newDate)
+        this.setState({idForBlockchain: documentId})
+    }
+
+    //TO-DO
+    createStudent = async() => {
+
     }
 
     componentDidMount = async () => {
@@ -109,7 +123,7 @@ class FileUpload extends Component {
                         <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
                     </div>
                         
-                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Add Document! </button>
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addToBlockchain}> Add Document! </button>
                 </form>
 
                 <br/><br/><br/><br/>

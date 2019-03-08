@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Firebase from '../Firebase/firebase';
+import firebase from '../Firebase/firebase';
 
 class Login extends Component {
         state = {
@@ -16,7 +16,7 @@ class Login extends Component {
 
     login = (e) => {
         e.preventDefault();
-        Firebase.auth().signInWithEmailAndPassword(this.state.email,
+        firebase.auth().signInWithEmailAndPassword(this.state.email,
             this.state.password).then((u)=>{
             }).catch((error) => {
                 console.log(error);

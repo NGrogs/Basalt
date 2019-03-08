@@ -34,6 +34,7 @@ contract BasaltStore {
     {
         documentCount ++;
         ListOfDocuments[documentCount] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate);
+        return documentCount ;
     }
 
     /** Retrieves docuement details */

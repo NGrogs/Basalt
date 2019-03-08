@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import storehash from '../IPFS/storehash';
-import ipfs from '../IPFS/IPFS';
-
 import getWeb3 from "../utils/getWeb3";
 
 class FileRetrieve extends Component {
