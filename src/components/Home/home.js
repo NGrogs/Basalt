@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.logout = this.logout.bind(this);
+    state ={
+
     }
 
     logout() {
@@ -16,7 +15,7 @@ class Home extends Component {
             <div align="center"className="container">
                 <h1> Home page </h1>
                 <br/><br/>
-
+                <h2>Hello: {this.state.user} </h2>
                 <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.logout}> Logout </button>
             </div>
         )

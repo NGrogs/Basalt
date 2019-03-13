@@ -8,8 +8,6 @@ class FileRetrieve extends Component {
         web3Provider: null,
         contracts: null,
         account: '0x0',
-        loading: false, //not needed?
-        contractInstance: null,
 
         // variables of student gotten from form
         StudentName: '',

@@ -6,19 +6,20 @@ import getWeb3 from "../utils/getWeb3";
 
 class FileUpload extends Component {
     state = {
-        // variable for the smart contract and ethereum attributes
+        // variables for current firebase user
+        user: '',
+        uid: '',
+
+        // variables for the smart contract and ethereum attributes
         web3Provider: null,
         contracts: null,
         account: '0x0',
-        loading: false, //not needed?
-        contractInstance: null,
 
         // variables of student gotten from form
         StudentName: '',
         StudentNumber: '',
         CourseCode: '',
         CourseName: '',
-        // perhaps link the id of the account who pushed the data
 
         // variables returned from and needed for smart contract
         IPFSlink: null,
@@ -26,8 +27,9 @@ class FileUpload extends Component {
         ethAddress: '',
         idForBlockchain: '',
 
-
+        successMessage: '',
     }
+
 
      /* updates fields when changed */
     handleChange= (e) => {
@@ -71,30 +73,44 @@ class FileUpload extends Component {
         this.setState({idForBlockchain: documentId})
     }
 
-    //TO-DO
+    // add a student record to the database
     createStudent = async() => {
-        //get student details from state variables
+        //get student details from state variables & current user uid
+        var uid = this.state.uid
         var _studentName = this.state.studentName
         var _studentNumber = this.state.studentNumber
         var _courseCode = this.state.courseCode
         var _courseName = this.state.courseName
         var _idForBlockchain = this.state.idForBlockchain
 
+        // database.ref.students.uid.studentNumber 
         const db = firebase.database()
-        //need to replace uid
-     /*   db.ref().child("students").child(uid).set(
+        db.ref().child("students").child(uid).child(_studentNumber).set(
             {   studentName: _studentName,
-                studentNumber: _studentNumber,
                 courseCode: _courseCode,
                 courseName: _courseName,
                 blockchainKey: _idForBlockchain
             }
         ).then(
-            // return success message
-        )*/
+            this.setState({successMessage: 'Student added'})
+        )
     }
 
     componentDidMount = async () => {
+    //check user is logged in
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            this.setState({user: firebase.auth().currentUser}) //not needed?
+            this.setState({uid: firebase.auth().currentUser.uid })
+        } else {
+            // No user is signed in.
+            //redirect to login
+            this.props.history.push('/login')
+        }
+        }.bind(this))
+
+    //initialize web3
     const web3 = await getWeb3();
 
     // get contract address
@@ -109,42 +125,53 @@ class FileUpload extends Component {
         return (
             <div align="center"className="container">
                 <h1> File Upload </h1><br/>
-                <h5>Ethereum Contract address: {this.state.ethAddress}</h5> <br/><br/>
+                <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
 
-                <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5>
+                <h3>{this.state.successMessage}</h3>
 
-                <h5>Your metamask account: {this.state.account[0]}</h5><br/><br/>
-                
-                <form>
-                    
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
+                <div className="row">
+                    <div className="col-sm"> 
+                        <h5>Ethereum Contract address: {this.state.ethAddress}</h5> <br/><br/>
                     </div>
+                    <div className="col-sm"> 
+                        <h5>Your metamask account: {this.state.account[0]}</h5><br/><br/>
+                    </div>
+                </div>
 
-                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Push Document to IPFS </button>
-                    <h5>The IPFS file address: {this.state.IPFSlink}</h5><br/><br/>
-
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>Student Name</label>
-                        <input value={this.state.name} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
+                <div className="row">
+                    <div className="col-sm">   
+                        <form>
+                            <div className="form-group " style={{width: "40%"}}>
+                                <label>Choose a file to upload</label>
+                                <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
+                            </div>
+                            <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Push Document to IPFS </button>
+                        </form>
+                            <h5>The IPFS file address: {this.state.IPFSlink}</h5><br/><br/>
                     </div>
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>Student Number</label>
-                        <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
+                    <div className="col-sm">
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <label>Student Name</label>
+                            <input value={this.state.name} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
+                        </div>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <label>Student Number</label>
+                            <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
+                        </div>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <label>Course Code</label>
+                            <input value={this.state.courseCode} onChange={this.handleChange} className="form-control" id="courseCode" type="text" name="courseCode" placeholder="Course Code" required/>
+                        </div>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <label>Course Name</label>
+                            <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
+                        </div>
+                            
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addToBlockchain}> Add Document! </button>
+                    </form>
                     </div>
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>Course Code</label>
-                        <input value={this.state.courseCode} onChange={this.handleChange} className="form-control" id="courseCode" type="text" name="courseCode" placeholder="Course Code" required/>
-                    </div>
-                    <div className="form-group " style={{width: "40%"}}>
-                        <label>Course Name</label>
-                        <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
-                    </div>
-                        
-                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addToBlockchain}> Add Document! </button>
-                </form>
-
+                </div>
                 <br/><br/><br/><br/>
                 
                 <h1> What information is stored along with your file? </h1> <br/>

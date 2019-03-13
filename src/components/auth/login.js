@@ -21,8 +21,9 @@ class Login extends Component {
             this.state.password).then((u)=>{
             }).catch((error) => {
                 console.log(error);
-            });
-            this.props.history.push('/home')
+            }).then(
+                this.props.history.push('/home')
+            )
     }
 
     /* renders the app */

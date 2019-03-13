@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import firebase from './components/Firebase/firebase';
 
 //var module = require('module').default;
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,8 +15,30 @@ import FileRetrieve from './components/Dapp/FileRetrieve';
 import viewStudent from './components/Student/viewStudent';
 import Footer from './components/Home/Footer';
 import thanks from './components/Home/Thanks';
+import myAccount from './components/Account/myAccount';
 
 class App extends Component {
+    state = {
+        user: {},
+
+    }
+
+    authListener() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+                this.setState({user});
+                
+            }
+            else {
+                this.setState({user: null});
+            }
+        });
+    }
+
+    componentDidMount() {
+        this.authListener()
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -31,6 +54,7 @@ class App extends Component {
                         <Route exact path='/viewStudent' component={viewStudent} />
                         <Route exact path='/FileRetrieve' component={FileRetrieve}/>
                         <Route exact path='/thanks' component={thanks}/>
+                        <Route exact path='/myAccount' component={myAccount}/>
                     </Switch>
                 </div>
             </BrowserRouter>
