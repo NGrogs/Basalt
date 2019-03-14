@@ -28,21 +28,21 @@ class myAccount extends Component {
             }
             }.bind(this))
             var _uid = this.state.uid
-            firebase.database().ref('/users/' + _uid).once('value').then(
-                function(snapshot) {
-                    this.setState({email: snapshot.child("email").val(), 
-                        country: snapshot.val().country,
-                        region: snapshot.val().Region,
-                        organizationName: snapshot.val().organizationName,
-                        organizationType: snapshot.val().organizationType,
-                        publicEthKey: snapshot.val().EthKey
+
+            // get reference to database location we want
+            const loc = firebase.database().ref('/users/' + _uid)
+            loc.once('value', snapshot => {
+                snapshot.forEach(child => {
+                    this.setState({
+                        email: child.val().email,
+                        country: child.val().country,
+                        region: child.val().Region,
+                        organizationName: child.val().organizationName,
+                        organizationType: child.val().organizationType,
+                        publicEthKey: child.val().EthKey
                     })
-                    console.log(snapshot.val().lYOaUSXFooNsmsFGi0rXmnwN1Ki2.Region) //works!
-                    //console.log(snapshot.val()._uid.Region)
-                  //  console.log(snapshot.val().$_uid.Region)
-                    console.log(snapshot.val().Region.val())
-                }.bind(this)
-            )
+                })
+            })
         }
 
     
