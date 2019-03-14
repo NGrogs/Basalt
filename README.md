@@ -20,14 +20,10 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - React JS
 
 # To - DO
-- Complete interaction between app and IPFS
 - Complete interaction between app and Ethereum
-- Minor CSS changes
 - Remove bloat
-- General UI/UX improvements 
 - Add private links in navigation
-- Complete my profile page
-- Add view/retrieve document page
+- Complete view/retrieve document page
 - Complete view a student page
 - Fiv navigation to thanks page
 
