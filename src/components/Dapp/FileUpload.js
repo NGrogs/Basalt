@@ -21,7 +21,7 @@ class FileUpload extends Component {
         CourseCode: '',
         CourseName: '',
 
-        // variables returned from and needed for smart contract
+        // variables returned from and needed for smart contract & IPFS
         IPFSlink: null,
         buffer: '',
         ethAddress: '',
@@ -69,31 +69,33 @@ class FileUpload extends Component {
         //get todays date
         let newDate = new Date()
         //call the smart contract method to create a new document
-        const documentId = storehash.methods.sendDocument(this.state.IPFSlink, newDate)
+        const documentId = storehash.methods.sendDocument(this.state.IPFSlink, newDate).call()
         this.setState({idForBlockchain: documentId})
+        this.createStudent(e)
     }
 
     // add a student record to the database
-    createStudent = async() => {
+    createStudent = async(e) => {
         //get student details from state variables & current user uid
-        var uid = this.state.uid
-        var _studentName = this.state.studentName
-        var _studentNumber = this.state.studentNumber
-        var _courseCode = this.state.courseCode
-        var _courseName = this.state.courseName
+        var _uid = this.state.uid
+        var _studentName = this.state.StudentName
+        var _studentNumber = this.state.StudentNumber
+        var _courseCode = this.state.CourseCode
+        var _courseName = this.state.CourseName
         var _idForBlockchain = this.state.idForBlockchain
 
         // database.ref.students.uid.studentNumber 
         const db = firebase.database()
-        db.ref().child("students").child(uid).child(_studentNumber).set(
+        db.ref().child("students").child(_uid).child(_studentNumber).set(
             {   studentName: _studentName,
                 courseCode: _courseCode,
                 courseName: _courseName,
                 blockchainKey: _idForBlockchain
             }
-        ).then(
-            this.setState({successMessage: 'Student added'})
-        )
+        );
+        
+        this.setState({successMessage: 'Student added'})
+        
     }
 
     componentDidMount = async () => {
@@ -128,6 +130,8 @@ class FileUpload extends Component {
                 <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
 
                 <h3>{this.state.successMessage}</h3>
+                <h3>name:{this.state.StudentName}</h3>
+                <h3>number:{this.state.StudentNumber}</h3>
 
                 <div className="row">
                     <div className="col-sm"> 
@@ -153,19 +157,19 @@ class FileUpload extends Component {
                     <form>
                         <div className="form-group " style={{width: "40%"}}>
                             <label>Student Name</label>
-                            <input value={this.state.name} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
+                            <input value={this.state.StudentName} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
                         </div>
                         <div className="form-group " style={{width: "40%"}}>
                             <label>Student Number</label>
-                            <input value={this.state.studentNumber} onChange={this.handleChange} className="form-control" id="studentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
+                            <input value={this.state.StudentNumber || ''} onChange={this.handleChange} className="form-control" id="StudentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
                         </div>
                         <div className="form-group " style={{width: "40%"}}>
                             <label>Course Code</label>
-                            <input value={this.state.courseCode} onChange={this.handleChange} className="form-control" id="courseCode" type="text" name="courseCode" placeholder="Course Code" required/>
+                            <input value={this.state.CourseCode || ''} onChange={this.handleChange} className="form-control" id="CourseCode" type="text" name="CourseCode" placeholder="Course Code" required/>
                         </div>
                         <div className="form-group " style={{width: "40%"}}>
                             <label>Course Name</label>
-                            <input value={this.state.courseName} onChange={this.handleChange} className="form-control" id="courseName" type="text" name="courseName" placeholder="Course Name" required/>
+                            <input value={this.state.CourseName || ''} onChange={this.handleChange} className="form-control" id="CourseName" type="text" name="CourseName" placeholder="Course Name" required/>
                         </div>
                             
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addToBlockchain}> Add Document! </button>

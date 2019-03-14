@@ -13,7 +13,6 @@ class myAccount extends Component {
         publicEthKey: ''
     }
 
-    //TO-DO get current user 
     componentDidMount = async () => {
 
         firebase.auth().onAuthStateChanged(function(user) {
