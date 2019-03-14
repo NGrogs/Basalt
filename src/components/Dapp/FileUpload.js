@@ -69,7 +69,7 @@ class FileUpload extends Component {
         //get todays date
         let newDate = new Date()
         //call the smart contract method to create a new document
-        const documentId = storehash.methods.sendDocument(this.state.IPFSlink, newDate).call()
+        const documentId = await storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
         this.setState({idForBlockchain: documentId})
         this.createStudent(e)
     }
@@ -130,8 +130,6 @@ class FileUpload extends Component {
                 <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
 
                 <h3>{this.state.successMessage}</h3>
-                <h3>name:{this.state.StudentName}</h3>
-                <h3>number:{this.state.StudentNumber}</h3>
 
                 <div className="row">
                     <div className="col-sm"> 

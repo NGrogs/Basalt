@@ -48,15 +48,42 @@ class myAccount extends Component {
     render() {
         return (
             <div align="center"className="container">
-                <h1> Account Details </h1> <br/>
-
-                <h2>User ID: {this.state.uid}</h2>
-                <h2>Email: {this.state.email}</h2>
-                <h2>Organization Name: {this.state.organizationName}</h2>
-                <h2>Organization Type: {this.state.organizationType}</h2>
-                <h2>Country: {this.state.country}</h2>
-                <h2>Region: {this.state.region}</h2>
-                <h2>Public Ethereum Key: {this.state.publicEthKey}</h2>
+                <h1> Account Details </h1> <br/><br/><br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Personal</h3>
+                    </div>
+                    <div className="col-sm">
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Organizational</h3>
+                    </div>
+                    <div className="col-sm">
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Location</h3>
+                    </div>
+                </div>
+                <br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h4>Email: {this.state.email}</h4>
+                    </div>
+                    <div className="col-sm">
+                        <h4>Organization Name: {this.state.organizationName}</h4>
+                    </div>
+                    <div className="col-sm">
+                        <h4>Country: {this.state.country}</h4>
+                    </div>
+                </div>
+                <br/><br/>
+                <div className="row">
+                    <div className="col-sm" >
+                        <h4>Public Ethereum Key: {this.state.publicEthKey}</h4>
+                    </div>
+                    <div className="col-sm">
+                        <h4>Organization Type: {this.state.organizationType}</h4>
+                    </div>
+                    <div className="col-sm">
+                        <h4>Region: {this.state.region}</h4>
+                    </div>
+                </div>
             </div>
         )
     }
