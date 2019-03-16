@@ -15,10 +15,10 @@ class viewStudent extends Component {
 
     findStudent = async(e) => {
         e.preventDefault()
-        
+        var _studentNumber = this.state.StudentNumber
         var _uid = this.state.uid
         // get reference to database location we want
-        const loc = firebase.database().ref('/students/' + _uid + StudentNumber)
+        const loc = firebase.database().ref('/students/' + _uid + _studentNumber)
         loc.once('value', snapshot => {
             snapshot.forEach(child => {
                 this.setState({
