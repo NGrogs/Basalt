@@ -29,7 +29,7 @@ contract BasaltStore {
         string memory _ipfsLocation, 
         uint256 _uploadDate 
     ) 
-    public 
+    public
     returns (uint256)
     {
         documentCount ++;

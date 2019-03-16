@@ -60,7 +60,7 @@ class myAccount extends Component {
                         <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Location</h3>
                     </div>
                 </div>
-                <br/>
+                <br/>                
                 <div className="row">
                     <div className="col-sm">
                         <h4>Email: {this.state.email}</h4>

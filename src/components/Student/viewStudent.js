@@ -9,7 +9,26 @@ class viewStudent extends Component {
         StudentName: '',
         StudentNumber: '',
         CourseCode: '',
-        CourseName: ''
+        CourseName: '',
+        BlockID: '',
+    }
+
+    findStudent = async(e) => {
+        e.preventDefault()
+        
+        var _uid = this.state.uid
+        // get reference to database location we want
+        const loc = firebase.database().ref('/students/' + _uid + StudentNumber)
+        loc.once('value', snapshot => {
+            snapshot.forEach(child => {
+                this.setState({
+                    StudentName: child.val().studentName ,
+                    CourseCode: child.val().courseCode ,
+                    CourseName:  child.val().courseName ,
+                    BlockID: child.val().blockchainKey
+                })
+            })
+        })
     }
 
     componentDidMount = async () => {
@@ -25,29 +44,50 @@ class viewStudent extends Component {
                 this.props.history.push('/login')
             }
             }.bind(this))
-            var _uid = this.state.uid
-
-            // get reference to database location we want
-            const loc = firebase.database().ref('/students/' + _uid)
-            loc.once('value', snapshot => {
-                snapshot.forEach(child => {
-                    this.setState({
-                        email: child.val().email,
-                        country: child.val().country,
-                        region: child.val().Region,
-                        organizationName: child.val().organizationName,
-                        organizationType: child.val().organizationType,
-                        publicEthKey: child.val().EthKey
-                    })
-                })
-            })
         }
 
     render() {
         return (
             <div align="center"className="container">
-                <h1> View Student page </h1>
-                
+                <h1> View Student page </h1><br/>
+
+                <div align="center">
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <input value={this.state.StudentNumber} onChange={this.handleChange} className="form-control" id="StudentNumber" type="text" name="StudentNumber" placeholder="Student ID" required/> 
+                        </div>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.findStudent}> Search </button>
+                    </form>
+                </div>
+                <br/><br/><br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3>Student Name: </h3>
+                    </div>
+                    <div className="col-sm">
+                        <h3>Student Number: </h3>
+                    </div>
+                    <div className="col-sm">
+                        <h3>Course Code: </h3>
+                    </div>
+                    <div className="col-sm">
+                        <h3>Course Name: </h3>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
+                        {this.state.studentName}
+                    </div>
+                    <div className="col-sm">
+                        {this.state.StudentNumber}
+                    </div>
+                    <div className="col-sm">
+                        {this.state.CourseCode}
+                    </div>
+                    <div className="col-sm">
+                        {this.state.CourseName}
+                    </div>
+                </div>
                 
             </div>
         )
