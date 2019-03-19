@@ -24,5 +24,7 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Add private links in navigation
 - Complete view/retrieve document page
 - Fiv navigation to thanks page
+- Add better error handling
+- Redirect unauthenticated users
 
 # Licences

@@ -68,10 +68,25 @@ class FileUpload extends Component {
         e.preventDefault()
         //get todays date
         let newDate = new Date()
+        newDate = newDate.getTime()
+        var _ipfsLink = this.state.IPFSlink
+        var _account = this.state.account
+
+       // var event = storehash.documentAdded()
+        var event = storehash.events.documentAdded()
+        await storehash.methods.sendDocument(_ipfsLink, newDate).send({from: _account.toString()})
+        event.watch(function(error, result) {
+                if (!error)
+                    //this.setState({idForBlockchain: result.args.id})
+                    console.log(result);
+            }
+        );
+
+
         //call the smart contract method to create a new document
-        const documentId = await storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
-        this.setState({idForBlockchain: documentId})
-        this.createStudent(e)
+        //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
+     //   this.setState({idForBlockchain: documentId})
+      //  this.createStudent(e)
     }
 
     // add a student record to the database
@@ -90,7 +105,7 @@ class FileUpload extends Component {
             {   studentName: _studentName,
                 courseCode: _courseCode,
                 courseName: _courseName,
-                blockchainKey: _idForBlockchain
+                blockchainKey: _idForBlockchain 
             }
         );
         

@@ -5,7 +5,6 @@ contract BasaltStore {
 
     // struct of how a document will be stored
     struct documentStore {
-
         // unique id of the doc
         uint256 id;
         // the url of the ipfs node where the document is stored
@@ -14,8 +13,6 @@ contract BasaltStore {
         address uploader;
         // date the document was uploaded (created here)
         uint dateUploaded;
-        
-
     }
 
     // mapping of all documents
@@ -23,19 +20,24 @@ contract BasaltStore {
     // count of all documents stored
     uint256 public documentCount;
 
+    /** Event that will be used to return the stored index of the newly added document */
+    event documentAdded(
+        uint id
+    );
+
     /** Stores the newly created document details */
-    // should this return a way to locate it?
     function sendDocument(
         string memory _ipfsLocation, 
         uint256 _uploadDate 
     ) 
     public
-    returns (uint256)
     {
         documentCount ++;
         ListOfDocuments[documentCount] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate);
-        return documentCount ;
+        emit documentAdded(documentCount);
     }
+
+    /** Return latest */
 
     /** Retrieves docuement details */
     function getDocument(
