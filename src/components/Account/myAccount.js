@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
-
+import { withRouter } from 'react-router-dom';
 class myAccount extends Component {
     state = {
         user: '',
@@ -89,4 +89,4 @@ class myAccount extends Component {
     }
 }
 
-export default myAccount;
+export default withRouter(myAccount);

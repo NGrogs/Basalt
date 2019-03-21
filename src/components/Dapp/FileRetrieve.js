@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import storehash from '../IPFS/storehash';
 import getWeb3 from "../utils/getWeb3";
-
+import { withRouter } from 'react-router-dom';
 class FileRetrieve extends Component {
 
     state = {
@@ -85,4 +85,4 @@ class FileRetrieve extends Component {
 
 }
 
-export default FileRetrieve;
+export default withRouter(FileRetrieve);

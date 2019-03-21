@@ -3,7 +3,7 @@ import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
-
+import { withRouter } from 'react-router-dom';
 class FileUpload extends Component {
     state = {
         // variables for current firebase user
@@ -207,4 +207,4 @@ class FileUpload extends Component {
     }
 }
 
-export default FileUpload;
+export default withRouter(FileUpload);

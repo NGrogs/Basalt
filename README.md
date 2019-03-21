@@ -20,7 +20,10 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - React JS
 
 # To - DO
-- Complete interaction between app and Ethereum
+- Get Event from Smart contract
+- Hash details on blokchain
+- Add copy command to retrieve file page
+- Add review functionality
 - Fiv navigation to thanks page
 - Add better error handling
 
