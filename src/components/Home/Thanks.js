@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Thanks extends Component {
         state = {
@@ -19,4 +20,4 @@ class Thanks extends Component {
     }
 }
 
-export default Thanks;
+export default withRouter(Thanks);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import logo from '../../Images/logoOGG.png';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
         state = {
@@ -54,4 +55,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
+import { withRouter } from 'react-router-dom';
 
 class viewStudent extends Component {
     state = {
@@ -12,6 +13,14 @@ class viewStudent extends Component {
         CourseName: '',
         BlockID: '',
     }
+
+    /* updates fields when changed */
+    handleChange= (e) => {
+        this.setState({ 
+            [e.target.id]: e.target.value 
+        })
+    }
+
 
     findStudent = async(e) => {
         e.preventDefault()
@@ -94,4 +103,4 @@ class viewStudent extends Component {
     }
 }
 
-export default viewStudent;
+export default withRouter(viewStudent);

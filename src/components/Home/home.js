@@ -1,14 +1,27 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
+import { withRouter } from 'react-router-dom';
 
 class Home extends Component {
     state ={
 
     }
 
-    logout() {
-        firebase.auth.signOut();
+    logout = (e) => {
+        e.preventDefault();
+        firebase.auth().signOut().then(this.handleResolve).catch(this.handleError)
     }
+
+    handleResolve = () => {
+    console.log('Signed Out');
+    this.props.history.push('/login')
+    }
+
+    handleError = (error) => {
+    console.error('Sign Out Error', error);
+    }
+
+    
 
     render() {
         return (
@@ -22,4 +35,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default withRouter(Home);

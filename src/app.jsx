@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import { withRouter, BrowserRouter, Switch, Route} from 'react-router-dom';
 import firebase from './components/Firebase/firebase';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -63,4 +63,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);
