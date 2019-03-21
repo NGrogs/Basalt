@@ -21,7 +21,6 @@ class Home extends Component {
     console.error('Sign Out Error', error);
     }
 
-    
 
     render() {
         return (
