@@ -23,7 +23,7 @@ class Login extends Component {
             }).catch((error) => {
                 console.log(error);
             }).then(
-                this.props.history.push('/home')
+                this.props.history.push('/')
             )
     }
 
