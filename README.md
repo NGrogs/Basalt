@@ -21,9 +21,7 @@ Businesses can retrieve and view this document in order to verify a students' cr
 
 # To - DO
 - Complete interaction between app and Ethereum
-- Add private links in navigation
 - Fiv navigation to thanks page
 - Add better error handling
-- Redirect unauthenticated users
 
 # Licences
