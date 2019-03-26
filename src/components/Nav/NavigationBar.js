@@ -7,6 +7,7 @@ import firebase from '../Firebase/firebase';
 
 const NavigationBar = () => {
     var user = firebase.auth().currentUser;
+    //will display signed in links only if user exists (aka signed in to firebase)
     const Links = user ? <SignedIn /> : <SignedOut />
 
     return (

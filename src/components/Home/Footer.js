@@ -5,10 +5,6 @@ class Footer extends Component {
     state = {
     }
 
-    sendToThanks = (e) => {
-        this.props.history.push('/FileUpload')
-    }
-
     render() {
         return (
             <footer className="footer text-center pt-5 pb-2 fixed-bottom" style={{backgroundColor: '#B65DF3'}}>
