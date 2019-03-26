@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
 class FileRetrieve extends Component {
@@ -44,6 +45,20 @@ class FileRetrieve extends Component {
             this.setState({uploadDate: this.state.documentDetails[2]})
         }
     }
+
+    componentDidMount = async () => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                this.setState({user: firebase.auth().currentUser}) //not needed?
+                this.setState({uid: firebase.auth().currentUser.uid })
+            } else {
+                // No user is signed in.
+                //redirect to login
+                this.props.history.push('/login')
+            }
+            }.bind(this))
+        }
 
     render = () => { 
         return (
