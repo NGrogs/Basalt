@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { withRouter, BrowserRouter, Switch, Route} from 'react-router-dom';
 import firebase from './components/Firebase/firebase';
-
+import getWeb3 from "./components/utils/getWeb3";
+import storehash from './components/IPFS/storehash';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import NavigationBar from './components/Nav/NavigationBar';
@@ -12,13 +13,14 @@ import FileUpload from './components/Dapp/FileUpload';
 import FileRetrieve from './components/Dapp/FileRetrieve';
 import viewStudent from './components/Student/viewStudent';
 import Footer from './components/Home/Footer';
-import thanks from './components/Home/Thanks';
 import myAccount from './components/Account/myAccount';
 
 class App extends Component {
     state = {
         user: {},
-
+        web3: '',
+        ethAddress: '',
+        account: '0x0',
     }
 
     authListener() {
@@ -33,8 +35,17 @@ class App extends Component {
         });
     }
 
-    componentDidMount() {
+    componentDidMount = async () =>{
         this.authListener()
+
+        const Web3 = await getWeb3();
+        this.setState({web3: Web3})
+        // get contract address
+        const ethAddress = await storehash.options.address
+        this.setState({ethAddress})
+
+        //set account for Blockchain network
+        this.setState({account: await Web3.eth.getAccounts()})
     }
 
     render() {
@@ -47,10 +58,11 @@ class App extends Component {
                         <Route exact path='/' component={Welcome} />
                         <Route exact path='/login' component={Login} /> 
                         <Route exact path='/signup' component={SignUp} />
-                        <Route exact path='/FileUpload' component={FileUpload} />
+                        <Route exact path='/FileUpload' render={
+                            (props) => <FileUpload {...props} acc={this.state.account} ethAdd={this.state.ethAddress} />
+                            } />
                         <Route exact path='/viewStudent' component={viewStudent} />
                         <Route exact path='/FileRetrieve' component={FileRetrieve}/>
-                        <Route exact path='/thanks' component={thanks}/>
                         <Route exact path='/myAccount' component={myAccount}/>
                     </Switch>
                 </div>

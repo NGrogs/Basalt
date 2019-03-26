@@ -5,31 +5,33 @@ import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
 class FileUpload extends Component {
-    state = {
-        // variables for current firebase user
-        user: '',
-        uid: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            account : this.props.acc,
+            ethAddress: this.props.ethAdd,
 
-        // variables for the smart contract and ethereum attributes
-        web3Provider: null,
-        contracts: null,
-        account: '0x0',
+            user: '',
+            uid: '',
 
-        // variables of student gotten from form
-        StudentName: '',
-        StudentNumber: '',
-        CourseCode: '',
-        CourseName: '',
+            // variables for the smart contract and ethereum attributes
+            web3Provider: null,
+            contracts: null,
+            
+            // variables of student gotten from form
+            StudentName: '',
+            StudentNumber: '',
+            CourseCode: '',
+            CourseName: '',
 
-        // variables returned from and needed for smart contract & IPFS
-        IPFSlink: null,
-        buffer: '',
-        ethAddress: '',
-        idForBlockchain: '',
+            // variables returned from and needed for smart contract & IPFS
+            IPFSlink: null,
+            buffer: '',
+            idForBlockchain: '',
 
-        successMessage: '',
+            successMessage: '',
+        };
     }
-
 
      /* updates fields when changed */
     handleChange= (e) => {
@@ -86,7 +88,7 @@ class FileUpload extends Component {
         //call the smart contract method to create a new document
         //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
      //   this.setState({idForBlockchain: documentId})
-      //  this.createStudent(e)
+      //  await this.createStudent(e)
     }
 
     // add a student record to the database
@@ -138,9 +140,12 @@ class FileUpload extends Component {
     this.setState({account: await web3.eth.getAccounts()})
     }
 
+
+    
+
     render = () => { 
         return (
-            <div align="center"className="container">
+            <div align="center"className="container" onLoad={this.componentDidMount}>
                 <h1> File Upload </h1><br/>
                 <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
 

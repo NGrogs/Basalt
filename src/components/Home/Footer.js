@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import {Redirect, withRouter } from 'react-router-dom';
 
 class Footer extends Component {
     state = {
     }
 
     sendToThanks = (e) => {
-        this.props.history.push('/thanks')
+        this.props.history.push('/FileUpload')
     }
 
     render() {
@@ -20,7 +20,7 @@ class Footer extends Component {
                 </div>
                 <div className="col-sm">
                     <div className="container" >
-                        <h3 className="footer-text text-white font-italic" onClick={this.sendToThanks.bind(this)}>Special thanks</h3>
+                        <h3 className="footer-text text-white font-italic"><a className="text-white" href="https://github.com/NGrogs/Basalt">Github</a></h3>
                     </div>
                 </div>
                 </div>

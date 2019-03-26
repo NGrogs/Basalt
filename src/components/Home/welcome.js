@@ -49,10 +49,24 @@ class Welcome extends Component {
                     </div>
                 </div>
                 <br/><br/><br/><br/>
-                <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Contact </h2> <br/>
-                <h5 style={{backgroundColor: '#e6e4e2'}}>
-                    If you wish to contact me, please email me at - ngrogan15@gmail.com <br/>
-                </h5>
+                <div className="row">
+                    <div className="col">
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Contact </h2> <br/>
+                        <h5 style={{backgroundColor: '#e6e4e2'}}>
+                            If you wish to contact me, please email me at <br/> ngrogan15@gmail.com <br/>
+                        </h5>
+                    </div>
+                    <div className="col">
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Thanks </h2> <br/>
+                        <h5 style={{backgroundColor: '#e6e4e2'}}>
+                            Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a>  <br/>
+                            Lecturer Patrick Tobin
+                        </h5>
+                    </div>
+                </div>
+
+
+                
             </div>
         )
     }
