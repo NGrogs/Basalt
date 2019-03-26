@@ -2,32 +2,17 @@ import Web3 from 'web3';
 const web3 = new Web3(window.web3.currentProvider);
 
 //contarct address
-const address = '0xADB13CC1A32b64f938BE7c1D3447DFcd20C09ae9';
+const address = '0x0cA1608c545E595141879301F2850C8a3583Cc97';
 
 //contract abi 
 const abi = [
 
   {
     "constant": true,
-    "inputs": [],
-    "name": "documentCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function",
-    "signature": "0xa5b16b2e"
-  },
-  {
-    "constant": true,
     "inputs": [
       {
         "name": "",
-        "type": "uint256"
+        "type": "uint64"
       }
     ],
     "name": "ListOfDocuments",
@@ -52,20 +37,22 @@ const abi = [
     "payable": false,
     "stateMutability": "view",
     "type": "function",
-    "signature": "0xf6b0a225"
+    "signature": "0x948a6764"
   },
   {
-    "anonymous": false,
-    "inputs": [
+    "constant": true,
+    "inputs": [],
+    "name": "documentCount",
+    "outputs": [
       {
-        "indexed": false,
-        "name": "id",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "documentAdded",
-    "type": "event",
-    "signature": "0xed4e245805678e351298f982e4ba6e4503807239246d00d5f74ebc880586a6ff"
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa5b16b2e"
   },
   {
     "constant": false,
@@ -77,6 +64,10 @@ const abi = [
       {
         "name": "_uploadDate",
         "type": "uint256"
+      },
+      {
+        "name": "_key",
+        "type": "uint64"
       }
     ],
     "name": "sendDocument",
@@ -84,14 +75,14 @@ const abi = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0xa5a7ee67"
+    "signature": "0x7aa3bd6a"
   },
   {
     "constant": true,
     "inputs": [
       {
         "name": "_id",
-        "type": "uint256"
+        "type": "uint64"
       }
     ],
     "name": "getDocument",
@@ -112,7 +103,7 @@ const abi = [
     "payable": false,
     "stateMutability": "view",
     "type": "function",
-    "signature": "0x3f9b250a"
+    "signature": "0x8844d877"
   }
 ]
 

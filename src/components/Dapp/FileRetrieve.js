@@ -32,12 +32,15 @@ class FileRetrieve extends Component {
         //check response is empty
         if(!this.state.documentDetails[0].length){
             alert("No entry found")
+            this.setState({IPFSlink: ''})
+            this.setState({uploadedAddress: ''})
+            this.setState({uploadDate: ''})
         }
         else {
           //  var seconds = this.state.documentDetails[2]
          //   var date = new Date(seconds);
             this.setState({IPFSlink: this.state.documentDetails[0]})
-            this.setState({uploadedAddress: this.state.documentDetails[2]})
+            this.setState({uploadedAddress: this.state.documentDetails[1]})
             this.setState({uploadDate: this.state.documentDetails[2]})
         }
     }

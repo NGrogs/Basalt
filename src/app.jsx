@@ -14,6 +14,7 @@ import FileRetrieve from './components/Dapp/FileRetrieve';
 import viewStudent from './components/Student/viewStudent';
 import Footer from './components/Home/Footer';
 import myAccount from './components/Account/myAccount';
+import SearchInstitute from './components/Institute/SearchInstitutes';
 
 class App extends Component {
     state = {
@@ -62,6 +63,7 @@ class App extends Component {
                             (props) => <FileUpload {...props} acc={this.state.account} ethAdd={this.state.ethAddress} />
                             } />
                         <Route exact path='/viewStudent' component={viewStudent} />
+                        <Route exact path='/searchInstitute' component={SearchInstitute} />
                         <Route exact path='/FileRetrieve' component={FileRetrieve}/>
                         <Route exact path='/myAccount' component={myAccount}/>
                     </Switch>

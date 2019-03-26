@@ -16,32 +16,25 @@ contract BasaltStore {
     }
 
     // mapping of all documents
-    mapping (uint => documentStore) public ListOfDocuments; 
+    mapping (uint64 => documentStore) public ListOfDocuments; 
     // count of all documents stored
     uint256 public documentCount;
-
-    /** Event that will be used to return the stored index of the newly added document */
-    event documentAdded(
-        uint id
-    );
 
     /** Stores the newly created document details */
     function sendDocument(
         string memory _ipfsLocation, 
-        uint256 _uploadDate 
+        uint256 _uploadDate,
+        uint64 _key
     ) 
     public
     {
         documentCount ++;
-        ListOfDocuments[documentCount] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate);
-        emit documentAdded(documentCount);
+        ListOfDocuments[_key] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate);
     }
-
-    /** Return latest */
 
     /** Retrieves docuement details */
     function getDocument(
-        uint256 _id
+        uint64 _id
     ) 
     public 
     view

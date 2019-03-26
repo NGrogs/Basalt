@@ -4,6 +4,8 @@ import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
+var hash = require('object-hash');
+
 class FileUpload extends Component {
     constructor(props) {
         super(props);
@@ -23,11 +25,11 @@ class FileUpload extends Component {
             StudentNumber: '',
             CourseCode: '',
             CourseName: '',
+            idForBlockchain: '',
 
             // variables returned from and needed for smart contract & IPFS
             IPFSlink: null,
             buffer: '',
-            idForBlockchain: '',
 
             successMessage: '',
         };
@@ -68,27 +70,26 @@ class FileUpload extends Component {
     /* store IPFS link on blockchain */
     addToBlockchain = async(e) => {
         e.preventDefault()
+
+        //create a new key for our student
+        var key = this.state.StudentNumber + this.state.account[0]
+        key = parseInt(hash(key), 10)
+        this.setState({idForBlockchain: key})
+        console.log(key)
+        
         //get todays date
         let newDate = new Date()
         newDate = newDate.getTime()
         var _ipfsLink = this.state.IPFSlink
-        var _account = this.state.account
+        var _account = this.state.account[0]
 
-       // var event = storehash.documentAdded()
-        var event = storehash.events.documentAdded()
-        await storehash.methods.sendDocument(_ipfsLink, newDate).send({from: _account.toString()})
-        event.watch(function(error, result) {
-                if (!error)
-                    //this.setState({idForBlockchain: result.args.id})
-                    console.log(result);
-            }
-        );
-
-
+        await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
+        
         //call the smart contract method to create a new document
         //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
-     //   this.setState({idForBlockchain: documentId})
-      //  await this.createStudent(e)
+        console.log("adding student")
+        await this.createStudent(e)
+        console.log("student added")
     }
 
     // add a student record to the database
