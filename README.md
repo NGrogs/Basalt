@@ -24,5 +24,8 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Add copy command to retrieve file page
 - Add review functionality
 - Add better error handling
+- Fix copy button
+- Get institute from firebase
+
 
 # Licences

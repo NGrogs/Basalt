@@ -13,6 +13,8 @@ class FileRetrieve extends Component {
         uploadedAddress: '',
         uploadDate: '',
         rating: 0,
+        canReview: false,
+        institiuteID: '',
     }
 
     /* updates fields when changed */
@@ -27,6 +29,7 @@ class FileRetrieve extends Component {
         document.execCommand('copy')
     }
 
+    //gets a document back from the Blockchain
     retrieveDocument = async (e) => {
         e.preventDefault()
         var _id = this.state.idToSearch
@@ -38,6 +41,7 @@ class FileRetrieve extends Component {
             this.setState({IPFSlink: ''})
             this.setState({uploadedAddress: ''})
             this.setState({uploadDate: ''})
+            this.setState({canReview: false})
         }
         else {
           //  var seconds = this.state.documentDetails[2]
@@ -45,6 +49,9 @@ class FileRetrieve extends Component {
             this.setState({IPFSlink: this.state.documentDetails[0]})
             this.setState({uploadedAddress: this.state.documentDetails[1]})
             this.setState({uploadDate: this.state.documentDetails[2]})
+            this.setState({canReview: true})
+
+            //grab institite that uploaded file
         }
     }
 
@@ -62,10 +69,34 @@ class FileRetrieve extends Component {
             }.bind(this))
         }
 
+        // changes the star rating
         changeRating = async( newRating, name ) =>{
-            this.setState({
-                rating: newRating
-            });
+            if(this.state.canReview){
+                this.setState({
+                    rating: newRating
+                });
+            }
+            else {
+                alert("Cannot review until a file has been retrieved")
+            }
+        }
+
+        // adds rating to firebase database
+        addReview = async() => {
+            //get student details from state variables & current user uid
+            var _uid = this.state.uid
+            var _institiuteID = this.state.institiuteID
+            let _newDate = new Date()
+            var _rating = this.state.rating
+
+            // database.ref.students.uid.studentNumber 
+            const db = firebase.database()
+            db.ref().child("reviews").child(_institiuteID).child(_uid).set(
+                {   
+                    rating: _rating,
+                    date: _newDate
+                }
+            );
         }
 
     render = () => { 
