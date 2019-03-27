@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 class FileRetrieve extends Component {
 
     state = {
@@ -11,6 +12,7 @@ class FileRetrieve extends Component {
         IPFSlink: null,        
         uploadedAddress: '',
         uploadDate: '',
+        rating: 0,
     }
 
     /* updates fields when changed */
@@ -60,6 +62,12 @@ class FileRetrieve extends Component {
             }.bind(this))
         }
 
+        changeRating = async( newRating, name ) =>{
+            this.setState({
+                rating: newRating
+            });
+        }
+
     render = () => { 
         return (
             <div align="center"className="container">
@@ -82,6 +90,21 @@ class FileRetrieve extends Component {
                     <h5>Upload Date: {this.state.uploadDate}</h5> <br/>
                     <h5>IPFS Link: {this.state.IPFSlink}</h5> <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.CopyLink} > Copy Link! </button>
                 </div>
+                </div>
+                <br/><br/><br/><br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3>Review this institute?</h3>
+                    </div>
+                    <div className="col-sm">
+                        <StarRatings
+                            rating={this.state.rating}
+                            starRatedColor="blue"
+                            changeRating={this.changeRating}
+                            numberOfStars={5}
+                            name='rating'
+                        />
+                    </div>
                 </div>
             </div>
         )

@@ -59,6 +59,7 @@ class App extends Component {
                         <Route exact path='/login' component={Login} /> 
                         <Route exact path='/signup' component={SignUp} />
                         <Route exact path='/FileUpload' render={
+                            // pushes ethereum address and metamask account down to child component
                             (props) => <FileUpload {...props} acc={this.state.account} ethAdd={this.state.ethAddress} />
                             } />
                         <Route exact path='/viewStudent' component={viewStudent} />

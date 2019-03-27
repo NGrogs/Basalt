@@ -83,8 +83,11 @@ class FileUpload extends Component {
         var _ipfsLink = this.state.IPFSlink
         var _account = this.state.account[0]
 
-        await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
-        
+        const test = async ()=> {
+            await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
+        };
+
+        test();
         //call the smart contract method to create a new document
         //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
         console.log("adding student")
