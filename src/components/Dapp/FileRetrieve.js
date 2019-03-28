@@ -130,7 +130,7 @@ class FileRetrieve extends Component {
                     <div className="col-sm">
                         <StarRatings
                             rating={this.state.rating}
-                            starRatedColor="blue"
+                            starRatedColor="purple"
                             changeRating={this.changeRating}
                             numberOfStars={5}
                             name='rating'

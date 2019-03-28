@@ -18,13 +18,37 @@ class Login extends Component {
 
     login = (e) => {
         e.preventDefault();
-        firebase.auth().signInWithEmailAndPassword(this.state.email,
+        var _email = this.state.email
+        var _password = this.state.password
+
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(() => {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return firebase.auth().signInWithEmailAndPassword(_email, _password).then((u)=>{
+                }).catch((error) => {
+                    console.log(error);
+                }).then(
+                    this.props.history.push('/')
+                )
+            })
+        .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode)
+        console.log(errorMessage)
+    });
+
+       /* firebase.auth().signInWithEmailAndPassword(this.state.email,
             this.state.password).then((u)=>{
             }).catch((error) => {
                 console.log(error);
             }).then(
                 this.props.history.push('/')
-            )
+            )*/
     }
 
     /* renders the app */
