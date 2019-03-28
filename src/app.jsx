@@ -33,11 +33,7 @@ class App extends Component {
                 this.setState({user: null});
             }
         });
-
-        
     }
-
-    
 
     componentDidMount = async () =>{
         this.authListener()

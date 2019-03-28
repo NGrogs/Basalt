@@ -63,6 +63,20 @@ class Welcome extends Component {
                             Lecturer Patrick Tobin
                         </h5>
                     </div>
+                    <div className="col">
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Help </h2> <br/>
+                        <h5 style={{textAlign: 'left', backgroundColor: '#e6e4e2'}}>
+                            If you having any issues with this application, try refreshing a page, 
+                            this may trigger Metamask in the event it didn't start correctly <br/><br/>
+
+                            If Metamask is having trouble completing a transaction, try restart 
+                            your account from the metamask menu <br/>
+                            (<i>This will delete all the transaction 
+                            records stored in your metamask so be sure you wish to do this</i>) <br/><br/>
+
+                            
+                        </h5>
+                    </div>
                 </div>
 
 
