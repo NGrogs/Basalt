@@ -28,9 +28,11 @@ class App extends Component {
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
                 this.setState({user});
+              //  this.props.history.push('/')
             }
             else {
                 this.setState({user: null});
+               // this.props.history.push('/')
             }
         });
     }

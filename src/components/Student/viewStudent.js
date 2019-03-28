@@ -26,14 +26,18 @@ class viewStudent extends Component {
         e.preventDefault()
         var _studentNumber = this.state.StudentNumber
         var _uid = this.state.uid
+        
         // get reference to database location we want
-        const loc = firebase.database().ref('/students/' + _uid + _studentNumber)
+        const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber + '/')
+        console.log(loc.toString())
         loc.once('value', snapshot => {
             snapshot.forEach(child => {
-                this.setState({
-                    StudentName: child.val().studentName ,
-                    CourseCode: child.val().courseCode ,
-                    CourseName:  child.val().courseName ,
+                console.log("hi")
+                console.log(child.val().studentName)
+                this.setState({ 
+                    StudentName: child.val().studentName,
+                    CourseCode: child.val().courseCode,
+                    CourseName:  child.val().courseName,
                     BlockID: child.val().blockchainKey
                 })
             })

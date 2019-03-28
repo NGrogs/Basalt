@@ -30,8 +30,6 @@ class FileUpload extends Component {
             // variables returned from and needed for smart contract & IPFS
             IPFSlink: null,
             buffer: '',
-
-            successMessage: '',
         };
     }
 
@@ -60,17 +58,23 @@ class FileUpload extends Component {
 
     /* send the file to IPFS */
     pushToIPFS = async(e) => {
-        e.preventDefault()
+      //  e.preventDefault()
         await ipfs.add(this.state.buffer, (err, ipfsHash) => {
             console.log(err, ipfsHash)
-            this.setState({IPFSlink : ipfsHash[0].hash})
+            //this.setState({IPFSlink : ipfsHash[0].hash})
+            console.log(ipfsHash[0].hash)
+            return ipfsHash[0].hash
         })
     }
 
     /* store IPFS link on blockchain */
     addToBlockchain = async(e) => {
-        e.preventDefault()
+      //  e.preventDefault()
 
+        //push the file to IPFS
+        ///var _ipfsLink = await this.pushToIPFS()
+
+        
         //create a new key for our student
         var key = this.state.StudentNumber + this.state.account[0]
         key = parseInt(hash(key), 10)
@@ -82,17 +86,26 @@ class FileUpload extends Component {
         newDate = newDate.getTime()
         var _ipfsLink = this.state.IPFSlink
         var _account = this.state.account[0]
+        console.log(_ipfsLink)
+        console.log(this.state.IPFSlink)
 
-        const test = async ()=> {
-            await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
-        };
+       // const test = async () => {
+        await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
+        //};
 
-        test();
+        //test();
         //call the smart contract method to create a new document
         //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
         console.log("adding student")
-        await this.createStudent(e)
+      //  await this.createStudent(e)
         console.log("student added")
+    }
+
+    AddMyStuff = async (e) => {
+        e.preventDefault()
+        await this.pushToIPFS()
+        await this.addToBlockchain()
+        await this.createStudent()
     }
 
     // add a student record to the database
@@ -115,7 +128,7 @@ class FileUpload extends Component {
             }
         );
         
-        this.setState({successMessage: 'Student added'})
+        alert("Student added")
         
     }
 
@@ -153,51 +166,33 @@ class FileUpload extends Component {
                 <h1> File Upload </h1><br/>
                 <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
 
-                <h3>{this.state.successMessage}</h3>
-
-                <div className="row">
-                    <div className="col-sm"> 
-                        <h5>Ethereum Contract address: {this.state.ethAddress}</h5> <br/><br/>
+            
+                <form>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Choose a file to upload</label>
+                        <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
                     </div>
-                    <div className="col-sm"> 
-                        <h5>Your metamask account: {this.state.account[0]}</h5><br/><br/>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Student Name</label>
+                        <input value={this.state.StudentName} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
                     </div>
-                </div>
-
-                <div className="row">
-                    <div className="col-sm">   
-                        <form>
-                            <div className="form-group " style={{width: "40%"}}>
-                                <label>Choose a file to upload</label>
-                                <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
-                            </div>
-                            <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.pushToIPFS}> Push Document to IPFS </button>
-                        </form>
-                            <h5>The IPFS file address: {this.state.IPFSlink}</h5><br/><br/>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Student Number</label>
+                        <input value={this.state.StudentNumber || ''} onChange={this.handleChange} className="form-control" id="StudentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
                     </div>
-                    <div className="col-sm">
-                    <form>
-                        <div className="form-group " style={{width: "40%"}}>
-                            <label>Student Name</label>
-                            <input value={this.state.StudentName} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
-                        </div>
-                        <div className="form-group " style={{width: "40%"}}>
-                            <label>Student Number</label>
-                            <input value={this.state.StudentNumber || ''} onChange={this.handleChange} className="form-control" id="StudentNumber" type="text" name="StudentNumber" placeholder="Student Number" required/>
-                        </div>
-                        <div className="form-group " style={{width: "40%"}}>
-                            <label>Course Code</label>
-                            <input value={this.state.CourseCode || ''} onChange={this.handleChange} className="form-control" id="CourseCode" type="text" name="CourseCode" placeholder="Course Code" required/>
-                        </div>
-                        <div className="form-group " style={{width: "40%"}}>
-                            <label>Course Name</label>
-                            <input value={this.state.CourseName || ''} onChange={this.handleChange} className="form-control" id="CourseName" type="text" name="CourseName" placeholder="Course Name" required/>
-                        </div>
-                            
-                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addToBlockchain}> Add Document! </button>
-                    </form>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Code</label>
+                        <input value={this.state.CourseCode || ''} onChange={this.handleChange} className="form-control" id="CourseCode" type="text" name="CourseCode" placeholder="Course Code" required/>
                     </div>
-                </div>
+                    <div className="form-group " style={{width: "40%"}}>
+                        <label>Course Name</label>
+                        <input value={this.state.CourseName || ''} onChange={this.handleChange} className="form-control" id="CourseName" type="text" name="CourseName" placeholder="Course Name" required/>
+                    </div>
+                        
+                    <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.AddMyStuff}> Add Document! </button>
+                </form>
+                
+                
                 <br/><br/><br/><br/>
                 
                 <h1> What information is stored along with your file? </h1> <br/>

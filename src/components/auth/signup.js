@@ -49,11 +49,13 @@ class Signup extends Component {
                             EthKey: _ethKey
                         }
                     );
-                }
-            ).then(
-                // 3: send user to login page
-                this.props.history.push('/login')
-            )
+                    // 3: send user to login page
+                    this.props.history.push('/login')
+                }).catch((error) => {
+                // console.log(error);
+                alert("invalid signup details")
+                this.props.history.push('/signup')
+            })
         
     }
 

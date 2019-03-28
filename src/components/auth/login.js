@@ -27,28 +27,23 @@ class Login extends Component {
             // if a user forgets to sign out.
             // ...
             // New sign-in will be persisted with session persistence.
-            return firebase.auth().signInWithEmailAndPassword(_email, _password).then((u)=>{
-                }).catch((error) => {
-                    console.log(error);
-                }).then(
+            return firebase.auth().signInWithEmailAndPassword(_email, _password).then(
+                (u)=>{ (
                     this.props.history.push('/')
                 )
+                }).catch((error) => {
+                   // console.log(error);
+                    alert("invalid login details")
+                    this.props.history.push('/login')
+                })
             })
         .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage)
+       // console.log(errorCode)
+       // console.log(errorMessage)
     });
-
-       /* firebase.auth().signInWithEmailAndPassword(this.state.email,
-            this.state.password).then((u)=>{
-            }).catch((error) => {
-                console.log(error);
-            }).then(
-                this.props.history.push('/')
-            )*/
     }
 
     /* renders the app */
