@@ -13,6 +13,8 @@ contract BasaltStore {
         address uploader;
         // date the document was uploaded (created here)
         uint dateUploaded;
+        // uploaders id on firebase database
+        string userID;
     }
 
     // mapping of all documents
@@ -24,12 +26,13 @@ contract BasaltStore {
     function sendDocument(
         string memory _ipfsLocation, 
         uint256 _uploadDate,
-        uint64 _key
+        uint64 _key,
+        string memory _userID
     ) 
     public
     {
         documentCount ++;
-        ListOfDocuments[_key] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate);
+        ListOfDocuments[_key] = documentStore(documentCount, _ipfsLocation, msg.sender, _uploadDate, _userID);
     }
 
     /** Retrieves docuement details */
@@ -38,12 +41,13 @@ contract BasaltStore {
     ) 
     public 
     view
-    returns (string memory, address, uint256)
+    returns (string memory, address, uint256, string memory)
     {
         // return the attributes of the documentStore we need
         string memory ipfsHash = ListOfDocuments[_id].ipfsHash;
         address uploader = ListOfDocuments[_id].uploader;
         uint256 dateUploaded = ListOfDocuments[_id].dateUploaded;
-        return (ipfsHash, uploader, dateUploaded);
+        string memory userID = ListOfDocuments[_id].userID;
+        return (ipfsHash, uploader, dateUploaded, userID);
     }
 }

@@ -43,6 +43,7 @@ class FileRetrieve extends Component {
             this.setState({IPFSlink: this.state.documentDetails[0]})
             this.setState({uploadedAddress: this.state.documentDetails[1]})
             this.setState({uploadDate: this.state.documentDetails[2]})
+            this.setState({institiuteID: this.state.documentDetails[3]})
             this.setState({canReview: true})
 
             //grab institite that uploaded file
@@ -80,9 +81,10 @@ class FileRetrieve extends Component {
                 </div>
                 <div className="col-sm">
                     <h2>File details</h2><br/>
-                    <h5>Uploader address: {this.state.uploadedAddress}</h5> <br/>
+                    <h5>Uploader metamask address: {this.state.uploadedAddress}</h5> <br/>
                     <h5>Upload Date: {this.state.uploadDate}</h5> <br/>
                     <h5>IPFS Link: {this.state.IPFSlink}</h5>
+                    <h5>Uploader account ID: {this.state.institiuteID}</h5>
 
                     <CopyToClipboard text={this.state.IPFSlink}
                         onCopy={() => this.setState({copied: true})}>

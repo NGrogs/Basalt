@@ -2,11 +2,10 @@ import Web3 from 'web3';
 const web3 = new Web3(window.web3.currentProvider);
 
 //contarct address
-const address = '0xADB13CC1A32b64f938BE7c1D3447DFcd20C09ae9';
+const address = '0x0cA1608c545E595141879301F2850C8a3583Cc97';
 
 //contract abi 
 const abi = [
-
   {
     "constant": true,
     "inputs": [
@@ -32,12 +31,15 @@ const abi = [
       {
         "name": "dateUploaded",
         "type": "uint256"
+      },
+      {
+        "name": "userID",
+        "type": "string"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x948a6764"
+    "type": "function"
   },
   {
     "constant": true,
@@ -51,8 +53,7 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0xa5b16b2e"
+    "type": "function"
   },
   {
     "constant": false,
@@ -68,14 +69,17 @@ const abi = [
       {
         "name": "_key",
         "type": "uint64"
+      },
+      {
+        "name": "_userID",
+        "type": "string"
       }
     ],
     "name": "sendDocument",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x7aa3bd6a"
+    "type": "function"
   },
   {
     "constant": true,
@@ -98,12 +102,15 @@ const abi = [
       {
         "name": "",
         "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "string"
       }
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function",
-    "signature": "0x8844d877"
+    "type": "function"
   }
 ]
 

@@ -93,13 +93,18 @@ class FileUpload extends Component {
         //get todays date
         let newDate = new Date()
         newDate = newDate.getTime()
+        //get the IPFS link
         var _ipfsLink = this.state.IPFSlink
+        // get the users metamask account
         var _account = this.state.account[0]
         console.log(_ipfsLink)
         console.log(this.state.IPFSlink)
 
+        //get current users ID
+        var _uid = this.state.uid
+
        // const test = async () => {
-        await storehash.methods.sendDocument(_ipfsLink, newDate, key).send({from: _account})
+        await storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
         //};
 
         //test();
