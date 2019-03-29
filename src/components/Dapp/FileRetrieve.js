@@ -83,8 +83,8 @@ class FileRetrieve extends Component {
                     <h2>File details</h2><br/>
                     <h5>Uploader metamask address: {this.state.uploadedAddress}</h5> <br/>
                     <h5>Upload Date: {this.state.uploadDate}</h5> <br/>
-                    <h5>IPFS Link: {this.state.IPFSlink}</h5>
-                    <h5>Uploader account ID: {this.state.institiuteID}</h5>
+                    <h5>IPFS Link: {this.state.IPFSlink}</h5> <br/>
+                    <h5>Uploader account ID: {this.state.institiuteID}</h5> <br/>
 
                     <CopyToClipboard text={this.state.IPFSlink}
                         onCopy={() => this.setState({copied: true})}>
@@ -97,10 +97,21 @@ class FileRetrieve extends Component {
                 <br/><br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with this link?</h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with this IPFS link?</h3>
                         <br/>
                         <h4>
                             Go to https://ipfs.io/ipfs/ followed by the IPFS key you retrieved and you will be able to download the file
+                        </h4>
+                    </div>
+                </div>
+                <br/><br/><br/><br/><br/><br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with the uploader account ID</h3>
+                        <br/>
+                        <h4>
+                            If you navigate to the <b>Search Institite</b> page you can search that ID and retrieve the uploaders details. <br/><br/>
+                            From there you can submit a review of the Institute if you'd like to help others see if they are trustworthy or not.
                         </h4>
                     </div>
                 </div>

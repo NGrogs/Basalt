@@ -85,10 +85,11 @@ class FileUpload extends Component {
         //create a new key for our student
         //var key = this.state.StudentNumber + this.state.account[0]
         //key = parseInt(hash(key), 10)
-        const rand = uniqueRandom(1, 10000000)
+      /*  const rand = uniqueRandom(1, 10000000)
         var key = rand()
         this.setState({idForBlockchain: key})
-        console.log(key)
+        console.log(key)*/
+        var key = this.state.idForBlockchain
         
         //get todays date
         let newDate = new Date()
@@ -104,7 +105,7 @@ class FileUpload extends Component {
         var _uid = this.state.uid
 
        // const test = async () => {
-        await storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
+        storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
         //};
 
         //test();
@@ -117,7 +118,12 @@ class FileUpload extends Component {
 
     AddMyStuff = async (e) => {
         e.preventDefault()
+        const rand = uniqueRandom(1, 10000000)
+        var key = rand()
+        this.setState({idForBlockchain: key})
+        console.log(key)
         //await this.pushToIPFS()
+        //await this.createStudent()
         await this.addToBlockchain()
         await this.createStudent()
     }

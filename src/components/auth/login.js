@@ -46,6 +46,14 @@ class Login extends Component {
     });
     }
 
+    resetPassword = async() => {
+        firebase.auth().sendPasswordResetEmail(this.state.email).then(function() {
+            alert("An email has been sent allowing you to reset your password")
+        }).catch(function(error){
+            alert("an error occured or this is an invalid email address")
+        })
+    }
+
     /* renders the app */
     render() {
         return (
@@ -66,6 +74,8 @@ class Login extends Component {
                         </div>
                         <br/>
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.login}> Login </button>
+                        <br/><br/>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.resetPassword}> Forgot password? </button>
                     </div>
                 </div>                
                 </form>
