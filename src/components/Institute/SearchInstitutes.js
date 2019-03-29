@@ -17,6 +17,7 @@ class SearchInstitutes extends Component {
 
         rating: 0,
         canReview: false,
+        reviewText: '',
     }
 
     /* updates fields when changed */
@@ -75,13 +76,15 @@ class SearchInstitutes extends Component {
             let _newDate = new Date()
             _newDate = _newDate.toDateString()
             var _rating = this.state.rating
+            var _reviewText = this.state.reviewText
 
             // database.ref.students.uid.studentNumber 
             const db = firebase.database()
             db.ref().child("reviews").child(_institiuteID).child(_uid).set(
                 {   
                     rating: _rating,
-                    date: _newDate
+                    date: _newDate,
+                    text: _reviewText
                 }
             );
             alert("Review sent")
@@ -169,7 +172,7 @@ class SearchInstitutes extends Component {
                 <br/><br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
-                        <h3>Review this institute?</h3>
+                        <h3>Review this institute?</h3><br/><br/><br/><br/>
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addReview}> Submit Review </button>
                     </div>
                     <div className="col-sm">
@@ -180,7 +183,11 @@ class SearchInstitutes extends Component {
                             numberOfStars={5}
                             name='rating'
                         />
+                        <br/><br/><br/><br/>
+                        <label>Add some text to your review</label><br/>
+                        <textarea value={this.state.reviewText} onChange={this.handleChange} id="reviewText" name="reviewText" style={{minWidth: '40%', minHeight: '14em'}}/>
                     </div>
+                    
                 </div>
 
                 
