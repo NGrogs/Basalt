@@ -73,6 +73,7 @@ class SearchInstitutes extends Component {
             // var _uid = firebase.auth().currentUser.uid
             var _institiuteID = this.state.key
             let _newDate = new Date()
+            _newDate = _newDate.toDateString()
             var _rating = this.state.rating
 
             // database.ref.students.uid.studentNumber 

@@ -20,11 +20,10 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - React JS
 
 # To - DO
-- Hash details on blokchain
-- Add copy command to retrieve file page
-- Add review functionality
+- Display reviews
 - Add better error handling
-- Get institute from firebase
+- Get student from firebase is broken
+- Fix error returned from smart contract
 
 
 # Licences
