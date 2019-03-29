@@ -24,6 +24,7 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Add better error handling
 - Get student from firebase is broken
 - Fix error returned from smart contract
+- Deplot smart contract to a test network
 
 # Dependencies used
 -  "@babel/plugin-transform-modules-commonjs": "^7.2.0",
