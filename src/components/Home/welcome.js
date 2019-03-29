@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
+import logo from '../../Images/logoOGG.png';
 class Welcome extends Component {
     
     render() {
         return (
             <div align="center"className="container" style={{marginTop: '3em'}}>
-                <h1> Welcome to Basalt </h1> <br/><br/><br/>
+                <div className="">
+                        <img src={logo} alt="logo" style={{width: '30em', height: '30em'}}/>
+                </div>
+                <br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
                     <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> About </h2>

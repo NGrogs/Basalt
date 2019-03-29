@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
-import StarRatings from 'react-star-ratings';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 class FileRetrieve extends Component {
 
@@ -13,8 +12,6 @@ class FileRetrieve extends Component {
         IPFSlink: null,        
         uploadedAddress: '',
         uploadDate: '',
-        rating: 0,
-        canReview: false,
         institiuteID: '',
         copied: false,
     }
@@ -69,37 +66,7 @@ class FileRetrieve extends Component {
                 this.props.history.push('/login')
             }
             }.bind(this))
-        }
-
-        // changes the star rating
-        changeRating = async( newRating, name ) =>{
-            if(this.state.canReview){
-                this.setState({
-                    rating: newRating
-                });
-            }
-            else {
-                alert("Cannot review until a file has been retrieved")
-            }
-        }
-
-        // adds rating to firebase database
-        addReview = async() => {
-            //get student details from state variables & current user uid
-            var _uid = this.state.uid
-            var _institiuteID = this.state.institiuteID
-            let _newDate = new Date()
-            var _rating = this.state.rating
-
-            // database.ref.students.uid.studentNumber 
-            const db = firebase.database()
-            db.ref().child("reviews").child(_institiuteID).child(_uid).set(
-                {   
-                    rating: _rating,
-                    date: _newDate
-                }
-            );
-        }
+        }  
 
     render = () => { 
         return (
@@ -110,7 +77,6 @@ class FileRetrieve extends Component {
                     <h2>Enter key to search:</h2>
                     <form>
                         <div className="form-group " style={{width: "40%"}}>
-                            <label>ID:</label>
                             <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>
                         </div>
 
@@ -125,25 +91,20 @@ class FileRetrieve extends Component {
 
                     <CopyToClipboard text={this.state.IPFSlink}
                         onCopy={() => this.setState({copied: true})}>
-                        <button>Copy to clipboard with button</button>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy IPFS key</button>
                     </CopyToClipboard>
 
-                    {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
+                    {this.state.copied ? <span style={{color: '#B65DF3'}}>Copied.</span> : null}
                 </div>
                 </div>
                 <br/><br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
-                        <h3>Review this institute?</h3>
-                    </div>
-                    <div className="col-sm">
-                        <StarRatings
-                            rating={this.state.rating}
-                            starRatedColor="purple"
-                            changeRating={this.changeRating}
-                            numberOfStars={5}
-                            name='rating'
-                        />
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with this link?</h3>
+                        <br/>
+                        <h4>
+                            Go to https://ipfs.io/ipfs/ followed by the IPFS key you retrieved and you will be able to download the file
+                        </h4>
                     </div>
                 </div>
             </div>

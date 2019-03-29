@@ -4,7 +4,7 @@ import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
-var hash = require('object-hash');
+const uniqueRandom = require('unique-random');
 
 class FileUpload extends Component {
     constructor(props) {
@@ -53,7 +53,14 @@ class FileUpload extends Component {
     convertToBuffer = async(reader) => {
         //file is converted to a buffer for upload to IPFS
         const buffer = await Buffer.from(reader.result)
-        this.setState({buffer})
+       /// this.setState({buffer})
+        await ipfs.add(buffer, (err, ipfsHash) => {
+            console.log(err, ipfsHash)
+            this.setState({IPFSlink : ipfsHash[0].hash})
+            console.log(ipfsHash[0].hash)
+           // return ipfsHash[0].hash
+        })
+        
     }
 
     /* send the file to IPFS */
@@ -61,9 +68,9 @@ class FileUpload extends Component {
       //  e.preventDefault()
         await ipfs.add(this.state.buffer, (err, ipfsHash) => {
             console.log(err, ipfsHash)
-            //this.setState({IPFSlink : ipfsHash[0].hash})
+            this.setState({IPFSlink : ipfsHash[0].hash})
             console.log(ipfsHash[0].hash)
-            return ipfsHash[0].hash
+            //return ipfsHash[0].hash
         })
     }
 
@@ -76,8 +83,10 @@ class FileUpload extends Component {
 
         
         //create a new key for our student
-        var key = this.state.StudentNumber + this.state.account[0]
-        key = parseInt(hash(key), 10)
+        //var key = this.state.StudentNumber + this.state.account[0]
+        //key = parseInt(hash(key), 10)
+        const rand = uniqueRandom(1, 10000000)
+        var key = rand()
         this.setState({idForBlockchain: key})
         console.log(key)
         
@@ -103,7 +112,7 @@ class FileUpload extends Component {
 
     AddMyStuff = async (e) => {
         e.preventDefault()
-        await this.pushToIPFS()
+        //await this.pushToIPFS()
         await this.addToBlockchain()
         await this.createStudent()
     }
@@ -157,8 +166,6 @@ class FileUpload extends Component {
     this.setState({account: await web3.eth.getAccounts()})
     }
 
-
-    
 
     render = () => { 
         return (

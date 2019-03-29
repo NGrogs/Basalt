@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import { withRouter } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 
 class SearchInstitutes extends Component {
     state = {
@@ -13,6 +14,9 @@ class SearchInstitutes extends Component {
         country: '',
         region: '',
         publicEthKey: '',
+
+        rating: 0,
+        canReview: false,
     }
 
     /* updates fields when changed */
@@ -34,10 +38,53 @@ class SearchInstitutes extends Component {
                     instituteType: child.val().organizationType,
                     region: child.val().Region,
                     country: child.val().country,
-                    publicEthKey: child.val().EthKey
+                    publicEthKey: child.val().EthKey,
+                    canReview: true
                 })
             })
         })
+        this.setState({user: firebase.auth().currentUser})
+       // console.log(this.state.user)
+        this.setState({uid : firebase.auth().currentUser.uid})
+        //console.log(this.state.uid)
+    }
+
+    // changes the star rating
+    changeRating = async( newRating, name ) =>{
+        if(this.state.canReview){
+            this.setState({
+                rating: newRating
+            });
+        }
+        else {
+            alert("Cannot review until you search for an institute")
+        }
+    }
+
+    // adds rating to firebase database
+    addReview = async() => {
+        //check user has given a star rating
+        if(this.state.rating <= 0){
+            alert("Please select a rating before submitting")
+        }
+        else{
+            //get student details from state variables & current user uid
+            var _uid = this.state.uid
+            // var _uid = firebase.auth().currentUser.uid
+            var _institiuteID = this.state.key
+            let _newDate = new Date()
+            var _rating = this.state.rating
+
+            // database.ref.students.uid.studentNumber 
+            const db = firebase.database()
+            db.ref().child("reviews").child(_institiuteID).child(_uid).set(
+                {   
+                    rating: _rating,
+                    date: _newDate
+                }
+            );
+            alert("Review sent")
+        }
     }
 
     componentDidMount = async () => {
@@ -118,6 +165,23 @@ class SearchInstitutes extends Component {
                         <h4>{this.state.publicEthKey}</h4>
                     </div>
                 </div>
+                <br/><br/><br/><br/>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3>Review this institute?</h3>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.addReview}> Submit Review </button>
+                    </div>
+                    <div className="col-sm">
+                        <StarRatings
+                            rating={this.state.rating}
+                            starRatedColor="purple"
+                            changeRating={this.changeRating}
+                            numberOfStars={5}
+                            name='rating'
+                        />
+                    </div>
+                </div>
+
                 
             </div>
         )
