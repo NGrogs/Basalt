@@ -3,6 +3,7 @@ import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 class FileRetrieve extends Component {
 
     state = {
@@ -15,6 +16,7 @@ class FileRetrieve extends Component {
         rating: 0,
         canReview: false,
         institiuteID: '',
+        copied: false,
     }
 
     /* updates fields when changed */
@@ -119,7 +121,14 @@ class FileRetrieve extends Component {
                     <h2>File details</h2><br/>
                     <h5>Uploader address: {this.state.uploadedAddress}</h5> <br/>
                     <h5>Upload Date: {this.state.uploadDate}</h5> <br/>
-                    <h5>IPFS Link: {this.state.IPFSlink}</h5> <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} onClick={this.CopyLink} > Copy Link! </button>
+                    <h5>IPFS Link: {this.state.IPFSlink}</h5>
+
+                    <CopyToClipboard text={this.state.IPFSlink}
+                        onCopy={() => this.setState({copied: true})}>
+                        <button>Copy to clipboard with button</button>
+                    </CopyToClipboard>
+
+                    {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null}
                 </div>
                 </div>
                 <br/><br/><br/><br/>
