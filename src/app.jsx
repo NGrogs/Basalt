@@ -19,8 +19,11 @@ import SearchInstitute from './components/Institute/SearchInstitutes';
 class App extends Component {
     state = {
         user: {},
+        // web3 library for connecting to a blockchain network
         web3: '',
+        //ethereum smart contract address
         ethAddress: '',
+        //metamask account
         account: '0x0',
     }
 

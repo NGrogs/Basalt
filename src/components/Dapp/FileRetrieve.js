@@ -23,11 +23,6 @@ class FileRetrieve extends Component {
         })
     }
 
-    copy = (e) => {
-        this.IPFSlink.select();
-        document.execCommand('copy')
-    }
-
     //gets a document back from the Blockchain
     retrieveDocument = async (e) => {
         e.preventDefault()
