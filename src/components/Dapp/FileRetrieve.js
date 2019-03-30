@@ -11,7 +11,6 @@ class FileRetrieve extends Component {
         documentDetails: [],
         IPFSlink: null,        
         uploadedAddress: '',
-        uploadDate: '',
         institiuteID: '',
         copied: false,
     }
@@ -42,7 +41,6 @@ class FileRetrieve extends Component {
          //   var date = new Date(seconds);
             this.setState({IPFSlink: this.state.documentDetails[0]})
             this.setState({uploadedAddress: this.state.documentDetails[1]})
-            this.setState({uploadDate: this.state.documentDetails[2]})
             this.setState({institiuteID: this.state.documentDetails[3]})
             this.setState({canReview: true})
 
@@ -82,7 +80,6 @@ class FileRetrieve extends Component {
                 <div className="col-sm">
                     <h2>File details</h2><br/>
                     <h5>Uploader metamask address: {this.state.uploadedAddress}</h5> <br/>
-                    <h5>Upload Date: {this.state.uploadDate}</h5> <br/>
                     <h5>IPFS Link: {this.state.IPFSlink}</h5> <br/>
                     <h5>Uploader account ID: {this.state.institiuteID}</h5> <br/>
 

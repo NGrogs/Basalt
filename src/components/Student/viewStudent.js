@@ -12,6 +12,7 @@ class viewStudent extends Component {
         CourseCode: '',
         CourseName: '',
         BlockID: '',
+        studentArray: [],
     }
 
     /* updates fields when changed */
@@ -28,24 +29,22 @@ class viewStudent extends Component {
         var _uid = this.state.uid
         
         // get reference to database location we want
-        const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber + '/')
+        const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber)
+       // const loc = firebase.database().ref('/students/').child(_uid).child(_studentNumber)
         console.log(loc.toString())
         loc.once('value', snapshot => {
             snapshot.forEach(child => {
-                console.log("hi")
-                console.log(child.val().studentName)
                 this.setState({ 
-                    StudentName: child.val().studentName,
+                    BlockID: child.val().blockchainKey,
                     CourseCode: child.val().courseCode,
                     CourseName:  child.val().courseName,
-                    BlockID: child.val().blockchainKey
+                    StudentName: child.val().studentName
                 })
             })
         })
     }
 
     componentDidMount = async () => {
-
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 // User is signed in.
@@ -86,10 +85,13 @@ class viewStudent extends Component {
                     <div className="col-sm">
                         <h3>Course Name: </h3>
                     </div>
+                    <div className="col-sm">
+                        <h3>ID on Blockchain: </h3>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        {this.state.studentName}
+                        {this.state.StudentName}
                     </div>
                     <div className="col-sm">
                         {this.state.StudentNumber}
@@ -99,6 +101,9 @@ class viewStudent extends Component {
                     </div>
                     <div className="col-sm">
                         {this.state.CourseName}
+                    </div>
+                    <div className="col-sm">
+                        {this.state.BlockID}
                     </div>
                 </div>
                 

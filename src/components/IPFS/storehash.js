@@ -2,7 +2,7 @@ import Web3 from 'web3';
 const web3 = new Web3(window.web3.currentProvider);
 
 //contarct address
-const address = '0x0cA1608c545E595141879301F2850C8a3583Cc97';
+const address = '0xADB13CC1A32b64f938BE7c1D3447DFcd20C09ae9';
 
 //contract abi 
 const abi = [
@@ -39,7 +39,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x948a6764"
   },
   {
     "constant": true,
@@ -53,7 +54,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0xa5b16b2e"
   },
   {
     "constant": false,
@@ -79,7 +81,8 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0xb4d3fca5"
   },
   {
     "constant": true,
@@ -110,7 +113,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x8844d877"
   }
 ]
 

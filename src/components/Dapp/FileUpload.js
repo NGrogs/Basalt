@@ -4,6 +4,7 @@ import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
+import { resolve } from 'multiaddr';
 const uniqueRandom = require('unique-random');
 
 class FileUpload extends Component {
@@ -53,68 +54,36 @@ class FileUpload extends Component {
     convertToBuffer = async(reader) => {
         //file is converted to a buffer for upload to IPFS
         const buffer = await Buffer.from(reader.result)
-       /// this.setState({buffer})
-        await ipfs.add(buffer, (err, ipfsHash) => {
-            console.log(err, ipfsHash)
-            this.setState({IPFSlink : ipfsHash[0].hash})
-            console.log(ipfsHash[0].hash)
-           // return ipfsHash[0].hash
-        })
+        this.setState({buffer})
         
     }
 
     /* send the file to IPFS */
     pushToIPFS = async(e) => {
-      //  e.preventDefault()
-        await ipfs.add(this.state.buffer, (err, ipfsHash) => {
-            console.log(err, ipfsHash)
-            this.setState({IPFSlink : ipfsHash[0].hash})
-            console.log(ipfsHash[0].hash)
-            //return ipfsHash[0].hash
-        })
+        return new Promise((resolve, reject) => {
+            ipfs.add(this.state.buffer, (err, ipfsHash) => {
+                resolve(ipfsHash[0].hash);
+            })
+        });
     }
 
     /* store IPFS link on blockchain */
-    addToBlockchain = async(e) => {
-      //  e.preventDefault()
-
-        //push the file to IPFS
-        ///var _ipfsLink = await this.pushToIPFS()
-
+    addToBlockchain = async(_ipfsLink) => {
         
-        //create a new key for our student
-        //var key = this.state.StudentNumber + this.state.account[0]
-        //key = parseInt(hash(key), 10)
-      /*  const rand = uniqueRandom(1, 10000000)
-        var key = rand()
-        this.setState({idForBlockchain: key})
-        console.log(key)*/
-        var key = this.state.idForBlockchain
+            const rand = uniqueRandom(1, 10000000)
+            var key = rand()
+
+            let newDate = new Date()
+            newDate = newDate.getTime()
+            var _account = this.state.account[0]
+            var _uid = this.state.uid
+
+            await storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
+
+            return (key)
         
-        //get todays date
-        let newDate = new Date()
-        newDate = newDate.getTime()
-        //get the IPFS link
-        var _ipfsLink = this.state.IPFSlink
-        // get the users metamask account
-        var _account = this.state.account[0]
-        console.log(_ipfsLink)
-        console.log(this.state.IPFSlink)
-
-        //get current users ID
-        var _uid = this.state.uid
-
-       // const test = async () => {
-        storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
-        //};
-
-        //test();
-        //call the smart contract method to create a new document
-        //storehash.methods.sendDocument(this.state.IPFSlink, newDate).send({from: this.state.account})
-        console.log("adding student")
-      //  await this.createStudent(e)
-        console.log("student added")
     }
+
 
     AddMyStuff = async (e) => {
         e.preventDefault()
@@ -122,21 +91,23 @@ class FileUpload extends Component {
         var key = rand()
         this.setState({idForBlockchain: key})
         console.log(key)
-        //await this.pushToIPFS()
+
+
+        const ipfsHash = await this.pushToIPFS()
         //await this.createStudent()
-        await this.addToBlockchain()
-        await this.createStudent()
+        const _key = await this.addToBlockchain(ipfsHash)
+        await this.createStudent(_key)
     }
 
     // add a student record to the database
-    createStudent = async(e) => {
+    createStudent = async(_key) => {
         //get student details from state variables & current user uid
         var _uid = this.state.uid
         var _studentName = this.state.StudentName
         var _studentNumber = this.state.StudentNumber
         var _courseCode = this.state.CourseCode
         var _courseName = this.state.CourseName
-        var _idForBlockchain = this.state.idForBlockchain
+        var _idForBlockchain = _key
 
         // database.ref.students.uid.studentNumber 
         const db = firebase.database()

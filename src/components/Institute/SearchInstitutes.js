@@ -68,6 +68,10 @@ class SearchInstitutes extends Component {
         if(this.state.rating <= 0){
             alert("Please select a rating before submitting")
         }
+        else if(this.state.uid == this.state.key)
+        {
+            alert("You can't review yourself")
+        }
         else{
             //get student details from state variables & current user uid
             var _uid = this.state.uid
