@@ -21,9 +21,10 @@ Businesses can retrieve and view this document in order to verify a students' cr
 
 # To - DO
 - Display reviews
-- Add better error handling
+- Add better error handling (student page)
 - Fix error returned from smart contract
 - Deploy smart contract to a test network
+- Add loading elements to pages waiting on elements to load
 
 # Dependencies used
 -  "@babel/plugin-transform-modules-commonjs": "^7.2.0",
