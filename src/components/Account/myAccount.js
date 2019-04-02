@@ -10,7 +10,9 @@ class myAccount extends Component {
         region: '',
         organizationType: '',
         organizationName: '',
-        publicEthKey: ''
+        publicEthKey: '',
+
+        reviews: [],
     }
 
     componentDidMount = async () => {
@@ -44,10 +46,35 @@ class myAccount extends Component {
             })
         }
 
+    // works for 1 review - need to scale
+    getReviews = async (e) => {
+        e.preventDefault()
+        var _uid = this.state.uid
+        // get reviews for the current user
+        const loc2 = firebase.database().ref('/reviews/' + _uid)
+        var theReviews = []
+        loc2.once('value', snapshot => {
+            var _reviewer = snapshot.key
+            //console.log(snapshot.key)
+            snapshot.forEach(child => {
+                var theVal = child.val()
+                theReviews.push(theVal)
+                var _date = theReviews[0].date
+                var _rating = theReviews[0].rating
+                var _text = theReviews[0].text
+                this.setState({reviews: [this.state.reviews, _reviewer, _date, _rating, _text]})
+
+            })
+        })
+    
+        //this.setState({reviews: [this.state.reviews, theReviews]})
+    }
+
     
     render() {
         return (
             <div align="center"className="container">
+            <br/><br/>
                 <h1> Account Details </h1> <br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
@@ -84,6 +111,23 @@ class myAccount extends Component {
                         <h4>Region: {this.state.region}</h4>
                     </div>
                 </div>
+
+                <br/><br/><br/><br/><br/>
+
+                <h1> Reviews </h1> <br/><br/><br/>
+                <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getReviews}> Get my reviews </button>
+
+
+                <div className="row">
+                    <div className="col-sm" ><br/><br/>
+                        <h4>Reviewer ID: {this.state.reviews[1]}</h4><br/>
+                        <h4>Date: {this.state.reviews[2]}</h4><br/>
+                        <h4>Star rating: {this.state.reviews[3]} /5</h4><br/>
+                        <h4>Text: {this.state.reviews[4]}</h4><br/>
+                    </div>
+                </div>
+
+                
             </div>
         )
     }
