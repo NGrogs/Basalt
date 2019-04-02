@@ -7,12 +7,11 @@ class viewStudent extends Component {
         user: '',
         uid: '',
 
-        StudentName: '',
+        studentName: '',
         StudentNumber: '',
-        CourseCode: '',
-        CourseName: '',
-        BlockID: '',
-        studentArray: [],
+        courseCode: '',
+        courseName: '',
+        blockID: '',
     }
 
     /* updates fields when changed */
@@ -23,23 +22,25 @@ class viewStudent extends Component {
     }
 
 
-    findStudent = async(e) => {
+    findStudent = (e) => {
         e.preventDefault()
         var _studentNumber = this.state.StudentNumber
         var _uid = this.state.uid
         
         // get reference to database location we want
         const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber)
-       // const loc = firebase.database().ref('/students/').child(_uid).child(_studentNumber)
-        console.log(loc.toString())
-        loc.once('value', snapshot => {
-            snapshot.forEach(child => {
-                this.setState({ 
-                    BlockID: child.val().blockchainKey,
-                    CourseCode: child.val().courseCode,
-                    CourseName:  child.val().courseName,
-                    StudentName: child.val().studentName
-                })
+
+        loc.once('value').then(snapshot => {
+            var blockchainKey = snapshot.child("blockchainKey").val()
+            var courseCode = snapshot.child("courseCode").val()
+            var courseName = snapshot.child("courseName").val()
+            var studentName = snapshot.child("studentName").val()
+
+            this.setState({
+                blockID: blockchainKey,
+                courseCode: courseCode,
+                courseName: courseName,
+                studentName: studentName
             })
         })
     }
@@ -74,36 +75,30 @@ class viewStudent extends Component {
                 <br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
-                        <h3>Student Name: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Student Name</h3>
                     </div>
                     <div className="col-sm">
-                        <h3>Student Number: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Course Code</h3>
                     </div>
                     <div className="col-sm">
-                        <h3>Course Code: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Course Name</h3>
                     </div>
                     <div className="col-sm">
-                        <h3>Course Name: </h3>
-                    </div>
-                    <div className="col-sm">
-                        <h3>ID on Blockchain: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>ID on Blockchain</h3>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        {this.state.StudentName}
+                        <h4>{this.state.studentName}</h4>
                     </div>
                     <div className="col-sm">
-                        {this.state.StudentNumber}
+                        <h4>{this.state.courseCode}</h4>
                     </div>
                     <div className="col-sm">
-                        {this.state.CourseCode}
+                        <h4>{this.state.courseName}</h4>
                     </div>
                     <div className="col-sm">
-                        {this.state.CourseName}
-                    </div>
-                    <div className="col-sm">
-                        {this.state.BlockID}
+                        <h4>{this.state.blockID}</h4>
                     </div>
                 </div>
                 

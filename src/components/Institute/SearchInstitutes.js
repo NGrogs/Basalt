@@ -33,6 +33,7 @@ class SearchInstitutes extends Component {
         const loc = firebase.database().ref('/users' + _key)
         loc.once('value', snapshot => {
             snapshot.forEach(child => {
+                console.log(child.val())
                 this.setState({
                     email: child.val().email,
                     instituteName: child.val().organizationName,
@@ -163,7 +164,7 @@ class SearchInstitutes extends Component {
                 </div>
                 
                 <div className="row">
-                <   div className="col-sm">
+                    <div className="col-sm">
                         <h4>{this.state.region}</h4>
                     </div>
                     <div className="col-sm">

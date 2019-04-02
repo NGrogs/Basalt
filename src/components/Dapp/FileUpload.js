@@ -72,6 +72,7 @@ class FileUpload extends Component {
         
             const rand = uniqueRandom(1, 10000000)
             var key = rand()
+            console.log(key)
 
             let newDate = new Date()
             newDate = newDate.getTime()
@@ -95,8 +96,9 @@ class FileUpload extends Component {
 
         const ipfsHash = await this.pushToIPFS()
         //await this.createStudent()
+        await this.createStudent(key)
         const _key = await this.addToBlockchain(ipfsHash)
-        await this.createStudent(_key)
+        //await this.createStudent(_key)
     }
 
     // add a student record to the database
@@ -112,7 +114,8 @@ class FileUpload extends Component {
         // database.ref.students.uid.studentNumber 
         const db = firebase.database()
         db.ref().child("students").child(_uid).child(_studentNumber).set(
-            {   studentName: _studentName,
+            {   
+                studentName: _studentName,
                 courseCode: _courseCode,
                 courseName: _courseName,
                 blockchainKey: _idForBlockchain 
