@@ -24,7 +24,6 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - Add better error handling
 - Fix error returned from smart contract
 - Deploy smart contract to a test network
-- Add tests for smart contract
 
 # Dependencies used
 -  "@babel/plugin-transform-modules-commonjs": "^7.2.0",
