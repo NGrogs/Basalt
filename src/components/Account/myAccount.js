@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import { withRouter } from 'react-router-dom';
+import logoSmall from '../../Images/logoSmall.png';
 class myAccount extends Component {
     state = {
         user: '',
@@ -13,6 +14,8 @@ class myAccount extends Component {
         publicEthKey: '',
 
         reviews: [],
+
+        loading: true,
     }
 
     componentDidMount = async () => {
@@ -43,6 +46,7 @@ class myAccount extends Component {
                         publicEthKey: child.val().EthKey
                     })
                 })
+                this.setState({loading: false})
             })
         }
 
@@ -73,6 +77,15 @@ class myAccount extends Component {
     
     render() {
         return (
+
+            this.state.loading ? <div align="center"className="container"> 
+                <br/><br/>
+                <img src={logoSmall} alt="logo" style={{width: '15em', height: '15em'}}/>
+                <br/><br/>
+                <h1>loading ...</h1> 
+            
+            </div> : 
+
             <div align="center"className="container">
             <br/><br/>
                 <h1> Account Details </h1> <br/><br/><br/>

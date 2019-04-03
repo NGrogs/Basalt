@@ -114,6 +114,7 @@ class SearchInstitutes extends Component {
     render() {
         return (
             <div align="center"className="container">
+                <br/><br/>
                 <h1> Search for an institute </h1><br/>
 
                 <div align="center">
