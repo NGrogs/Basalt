@@ -140,18 +140,17 @@ class myAccount extends Component {
                 <h1> Reviews </h1> <br/><br/><br/>
                 <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getReviews}> Get my reviews </button>
 
-
+                <br/><br/><br/><br/>
                 <div className="row">
-                    <div className="col-sm" ><br/><br/>
-                        <h4>Reviewer ID: {this.state.reviews[0]}</h4><br/>
-                        <h4>Date: {this.state.reviews[1]}</h4><br/>
-                        <h4>Star rating: {this.state.reviews[2]} /5</h4><br/>
-                        <h4>Text: {this.state.reviews[3]}</h4><br/>
-                    </div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Reviewer ID </h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Date </h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Star rating  /5</h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Text</h3></div>                    
                 </div>
-
-                <div>
-                    {this.state.reviews.map(item => <div> {item} </div>)}
+                <br/><br/>
+                <div className="row">
+                    
+                    {this.state.reviews.map(item => <div className="col-3" style={{marginBottom: '3em'}}> <h5>{item}</h5> </div>)}
                 </div>
                 
             </div>
