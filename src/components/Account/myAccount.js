@@ -75,7 +75,8 @@ class myAccount extends Component {
                 //console.log(_rating)
                 //console.log(_text)
                 i++
-                this.setState({reviews: [this.state.reviews, _reviewer, _date, _rating, _text]})
+                this.setState({reviews: this.state.reviews.concat([_reviewer, _date, _rating, _text])})
+                //this.setState({reviews: [this.state.reviews, _reviewer, _date, _rating, _text]})
 
             })
         })
