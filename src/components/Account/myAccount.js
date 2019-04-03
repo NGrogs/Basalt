@@ -58,14 +58,23 @@ class myAccount extends Component {
         const loc2 = firebase.database().ref('/reviews/' + _uid)
         var theReviews = []
         loc2.once('value', snapshot => {
-            var _reviewer = snapshot.key
+            //var _reviewer = snapshot.key
+            //console.log(_reviewer)
+            //console.log(snapshot)
             //console.log(snapshot.key)
+            var i = 0;
             snapshot.forEach(child => {
                 var theVal = child.val()
+                //console.log("key is" + child.key)
                 theReviews.push(theVal)
-                var _date = theReviews[0].date
-                var _rating = theReviews[0].rating
-                var _text = theReviews[0].text
+                var _reviewer = child.key
+                var _date = theReviews[i].date
+                var _rating = theReviews[i].rating
+                var _text = theReviews[i].text
+                //console.log(_date)
+                //console.log(_rating)
+                //console.log(_text)
+                i++
                 this.setState({reviews: [this.state.reviews, _reviewer, _date, _rating, _text]})
 
             })
@@ -133,13 +142,16 @@ class myAccount extends Component {
 
                 <div className="row">
                     <div className="col-sm" ><br/><br/>
-                        <h4>Reviewer ID: {this.state.reviews[1]}</h4><br/>
-                        <h4>Date: {this.state.reviews[2]}</h4><br/>
-                        <h4>Star rating: {this.state.reviews[3]} /5</h4><br/>
-                        <h4>Text: {this.state.reviews[4]}</h4><br/>
+                        <h4>Reviewer ID: {this.state.reviews[0]}</h4><br/>
+                        <h4>Date: {this.state.reviews[1]}</h4><br/>
+                        <h4>Star rating: {this.state.reviews[2]} /5</h4><br/>
+                        <h4>Text: {this.state.reviews[3]}</h4><br/>
                     </div>
                 </div>
 
+                <div>
+                    {this.state.reviews.map(item => <div> {item} </div>)}
+                </div>
                 
             </div>
         )

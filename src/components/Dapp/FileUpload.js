@@ -68,24 +68,44 @@ class FileUpload extends Component {
     }
 
     /* store IPFS link on blockchain */
-    addToBlockchain = async(_ipfsLink) => {
+    addToBlockchain = async(_ipfsLink, _key) => {
         
-            const rand = uniqueRandom(1, 10000000)
+           /* const rand = uniqueRandom(1, 10000000)
             var key = rand()
-            console.log(key)
+            console.log(key)*/
 
             let newDate = new Date()
             newDate = newDate.getTime()
             var _account = this.state.account[0]
             var _uid = this.state.uid
 
-            await storehash.methods.sendDocument(_ipfsLink, newDate, key, _uid).send({from: _account})
+            await storehash.methods.sendDocument(_ipfsLink, newDate, _key, _uid).send({from: _account})
+            .then( () =>{
+                var _uid = this.state.uid
+                var _studentName = this.state.StudentName
+                var _studentNumber = this.state.StudentNumber
+                var _courseCode = this.state.CourseCode
+                var _courseName = this.state.CourseName
+                var _idForBlockchain = _key
 
-            return (key)
+                const db = firebase.database()
+                db.ref().child("students").child(_uid).child(_studentNumber).set(
+                    {   
+                        studentName: _studentName,
+                        courseCode: _courseCode,
+                        courseName: _courseName,
+                        blockchainKey: _idForBlockchain 
+                    }
+                );
+                
+                alert("Student added")
+            })
+
+            return (_key)
         
     }
 
-
+    //// fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     AddMyStuff = async (e) => {
         e.preventDefault()
         const rand = uniqueRandom(1, 10000000)
@@ -96,8 +116,8 @@ class FileUpload extends Component {
 
         const ipfsHash = await this.pushToIPFS()
         //await this.createStudent()
-        await this.createStudent(key)
-        const _key = await this.addToBlockchain(ipfsHash)
+        //await this.createStudent(key)
+        const _key = await this.addToBlockchain(ipfsHash, key)
         //await this.createStudent(_key)
     }
 

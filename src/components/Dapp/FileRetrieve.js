@@ -83,7 +83,7 @@ class FileRetrieve extends Component {
                     <h5>IPFS Link: {this.state.IPFSlink}</h5> <br/>
                     <h5>Uploader account ID: {this.state.institiuteID}</h5> <br/>
 
-                    <CopyToClipboard text={this.state.IPFSlink}
+                    <CopyToClipboard text={"https://ipfs.io/ipfs/" + this.state.IPFSlink}
                         onCopy={() => this.setState({copied: true})}>
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy IPFS key</button>
                     </CopyToClipboard>
@@ -97,7 +97,7 @@ class FileRetrieve extends Component {
                         <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with this IPFS link?</h3>
                         <br/>
                         <h4>
-                            Go to https://ipfs.io/ipfs/ followed by the IPFS key you retrieved and you will be able to download the file
+                            Enter the link into your searchbar and you will be able to download the file
                         </h4>
                     </div>
                 </div>

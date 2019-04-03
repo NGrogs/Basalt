@@ -52,7 +52,7 @@ class Signup extends Component {
                     // 3: send user to login page
                     this.props.history.push('/login')
                 }).catch((error) => {
-                // console.log(error);
+                console.log(error);
                 alert("invalid signup details")
                 this.props.history.push('/signup')
             })
