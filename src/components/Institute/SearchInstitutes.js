@@ -18,6 +18,7 @@ class SearchInstitutes extends Component {
         rating: 0,
         canReview: false,
         reviewText: '',
+        reviews: [],
     }
 
     /* updates fields when changed */
@@ -93,6 +94,32 @@ class SearchInstitutes extends Component {
                 }
             );
             alert("Review sent")
+        }
+    }
+
+    getReviews = async (e) => {
+        e.preventDefault()
+        if(this.state.canReview){
+            var _keySearch = this.state.key
+            // get reviews for the current user
+            const loc2 = firebase.database().ref('/reviews/' + _keySearch)
+            var theReviews = []
+            loc2.once('value', snapshot => {
+                var i = 0;
+                snapshot.forEach(child => {
+                    var theVal = child.val()
+                    theReviews.push(theVal)
+                    var _reviewer = child.key
+                    var _date = theReviews[i].date
+                    var _rating = theReviews[i].rating
+                    var _text = theReviews[i].text
+                    i++
+                    this.setState({reviews: this.state.reviews.concat([_reviewer, _date, _rating, _text])})
+                })
+            })
+        }
+        else {
+            alert("Cannot see reviews until you search for an institute")
         }
     }
 
@@ -195,8 +222,24 @@ class SearchInstitutes extends Component {
                     </div>
                     
                 </div>
-
+                <br/><br/><br/><br/>
                 
+                <h3>See this institute's reviews</h3><br/><br/><br/><br/>
+                <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getReviews}> Get Reviews </button>
+                
+
+                <br/><br/><br/><br/>
+                <div className="row">
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Reviewer ID </h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Date </h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Star rating  /5</h3></div>
+                    <div className="col-3" ><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Text</h3></div>                    
+                </div>
+                <br/><br/>
+                <div className="row">
+                    
+                    {this.state.reviews.map(item => <div className="col-3" style={{marginBottom: '3em'}}> <h5>{item}</h5> </div>)}
+                </div>                
             </div>
         )
     }

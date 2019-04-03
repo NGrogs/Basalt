@@ -50,7 +50,6 @@ class myAccount extends Component {
             })
         }
 
-    // works for 1 review - need to scale
     getReviews = async (e) => {
         e.preventDefault()
         var _uid = this.state.uid
@@ -149,7 +148,6 @@ class myAccount extends Component {
                 </div>
                 <br/><br/>
                 <div className="row">
-                    
                     {this.state.reviews.map(item => <div className="col-3" style={{marginBottom: '3em'}}> <h5>{item}</h5> </div>)}
                 </div>
                 
