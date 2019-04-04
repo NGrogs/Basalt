@@ -80,7 +80,7 @@ class FileUpload extends Component {
             var _uid = this.state.uid
 
             await storehash.methods.sendDocument(_ipfsLink, newDate, _key, _uid).send({from: _account})
-            .then( () =>{
+            /*.then( () =>{
                 var _uid = this.state.uid
                 var _studentName = this.state.StudentName
                 var _studentNumber = this.state.StudentNumber
@@ -99,7 +99,7 @@ class FileUpload extends Component {
                 );
                 
                 alert("Student added")
-            })
+            })*/
 
             return (_key)
         
@@ -116,7 +116,7 @@ class FileUpload extends Component {
 
         const ipfsHash = await this.pushToIPFS()
         //await this.createStudent()
-        //await this.createStudent(key)
+        await this.createStudent(key)
         const _key = await this.addToBlockchain(ipfsHash, key)
         //await this.createStudent(_key)
     }

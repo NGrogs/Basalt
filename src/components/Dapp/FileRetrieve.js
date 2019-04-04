@@ -13,6 +13,7 @@ class FileRetrieve extends Component {
         uploadedAddress: '',
         institiuteID: '',
         copied: false,
+        detailsFound: false,
     }
 
     /* updates fields when changed */
@@ -35,6 +36,7 @@ class FileRetrieve extends Component {
             this.setState({uploadedAddress: ''})
             this.setState({uploadDate: ''})
             this.setState({canReview: false})
+            this.setState({detailsFound: false})
         }
         else {
           //  var seconds = this.state.documentDetails[2]
@@ -43,6 +45,7 @@ class FileRetrieve extends Component {
             this.setState({uploadedAddress: this.state.documentDetails[1]})
             this.setState({institiuteID: this.state.documentDetails[3]})
             this.setState({canReview: true})
+            this.setState({detailsFound: true})
 
             //grab institite that uploaded file
         }
@@ -64,9 +67,21 @@ class FileRetrieve extends Component {
 
     render = () => { 
         return (
-            <div align="center"className="container">
-                <h1> File Retrieve </h1><br/><br/><br/>
-                <div className="row">
+            !this.state.detailsFound ? 
+            <div align="center"className="container" style={{paddingTop: '3em'}}>
+            <div className="col-sm"> 
+                    <h2>Enter key to search:</h2>
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>
+                        </div>
+
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.retrieveDocument}> Find Document! </button>
+                    </form>
+                </div>
+            </div> :
+            
+            <div align="center"className="container" style={{paddingTop: '3em'}}>
                 <div className="col-sm"> 
                     <h2>Enter key to search:</h2>
                     <form>
@@ -77,20 +92,29 @@ class FileRetrieve extends Component {
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.retrieveDocument}> Find Document! </button>
                     </form>
                 </div>
-                <div className="col-sm">
-                    <h2>File details</h2><br/>
-                    <h5>Uploader metamask address: {this.state.uploadedAddress}</h5> <br/>
-                    <h5>IPFS Link: {this.state.IPFSlink}</h5> <br/>
-                    <h5>Uploader account ID: {this.state.institiuteID}</h5> <br/>
+
+                <div className="col-sm" style={{paddingTop: '5em'}}>
+
+                    <div className="row">
+                        <div className="col"><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Uploader metamask address</h3></div>
+                        <div className="col"><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>IPFS Link</h3></div>
+                        <div className="col"><h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Uploader account ID</h3></div>
+                    </div>
+                    <div className="row">
+                        <div className="col"><h5>{this.state.uploadedAddress}</h5></div>
+                        <div className="col"><h5>{this.state.IPFSlink}</h5></div>
+                        <div className="col"><h5>{this.state.institiuteID}</h5></div>
+                    </div>
+                <br/><br/>
 
                     <CopyToClipboard text={"https://ipfs.io/ipfs/" + this.state.IPFSlink}
                         onCopy={() => this.setState({copied: true})}>
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy IPFS key</button>
                     </CopyToClipboard>
 
-                    {this.state.copied ? <span style={{color: '#B65DF3'}}>Copied.</span> : null}
+                    {this.state.copied ? <span style={{color: '#B65DF3', paddingLeft: '3em'}}>Copied.</span> : null}
                 </div>
-                </div>
+                
                 <br/><br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
@@ -107,7 +131,7 @@ class FileRetrieve extends Component {
                         <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with the uploader account ID</h3>
                         <br/>
                         <h4>
-                            If you navigate to the <b>Search Institite</b> page you can search that ID and retrieve the uploaders details. <br/><br/>
+                            If you navigate to the <b>Search Institute</b> page you can search that ID and retrieve the uploaders details. <br/><br/>
                             From there you can submit a review of the Institute if you'd like to help others see if they are trustworthy or not.
                         </h4>
                     </div>

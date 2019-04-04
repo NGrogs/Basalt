@@ -2,8 +2,8 @@ import Web3 from 'web3';
 const web3 = new Web3(window.web3.currentProvider);
 
 //contarct address
+const Kovanaddress = '0x772E24532a39A7D0f55544316514d54a53Dc2b18';
 const address = '0x1309CB274a7d16d489EDCb13424CAeED3f88AE16';
-
 //contract abi 
 const abi = [
   {
