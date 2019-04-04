@@ -12,6 +12,8 @@ class viewStudent extends Component {
         courseCode: '',
         courseName: '',
         blockID: '',
+
+        detailsFound: false,
     }
 
     /* updates fields when changed */
@@ -40,7 +42,8 @@ class viewStudent extends Component {
                 blockID: blockchainKey,
                 courseCode: courseCode,
                 courseName: courseName,
-                studentName: studentName
+                studentName: studentName,
+                detailsFound: true
             })
         })
     }
@@ -61,8 +64,10 @@ class viewStudent extends Component {
 
     render() {
         return (
-            <div align="center"className="container">
-                <h1> View Student page </h1><br/>
+
+            !this.state.detailsFound ? 
+            <div align="center"className="container" style={{paddingTop: '3em'}}> 
+                <h1> Enter a student's ID to view their details </h1><br/>
 
                 <div align="center">
                     <form>
@@ -72,6 +77,20 @@ class viewStudent extends Component {
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.findStudent}> Search </button>
                     </form>
                 </div>
+            </div> : 
+
+            <div align="center"className="container" style={{paddingTop: '3em'}}>
+                <h1> Enter a student's ID to view their details </h1><br/>
+
+                <div align="center">
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <input value={this.state.StudentNumber} onChange={this.handleChange} className="form-control" id="StudentNumber" type="text" name="StudentNumber" placeholder="Student ID" required/> 
+                        </div>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.findStudent}> Search </button>
+                    </form>
+                </div>
+                
                 <br/><br/><br/>
                 <div className="row">
                     <div className="col-sm">
@@ -87,6 +106,7 @@ class viewStudent extends Component {
                         <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>ID on Blockchain</h3>
                     </div>
                 </div>
+                <br/>
                 <div className="row">
                     <div className="col-sm">
                         <h4>{this.state.studentName}</h4>
@@ -101,7 +121,7 @@ class viewStudent extends Component {
                         <h4>{this.state.blockID}</h4>
                     </div>
                 </div>
-                
+            
             </div>
         )
     }

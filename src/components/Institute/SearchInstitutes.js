@@ -224,7 +224,7 @@ class SearchInstitutes extends Component {
                 </div>
                 <br/><br/><br/><br/>
                 
-                <h3>See this institute's reviews</h3><br/><br/><br/><br/>
+                <h3>See this institute's reviews</h3><br/><br/><br/>
                 <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getReviews}> Get Reviews </button>
                 
 
