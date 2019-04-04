@@ -11,6 +11,7 @@ Colleges upload documents containing details of a student/graduates' academic de
 
 Businesses can retrieve and view this document in order to verify a students' credentials.
 
+
 # Technologies
 - Solidity
 - Web3.js
@@ -22,8 +23,6 @@ Businesses can retrieve and view this document in order to verify a students' cr
 # To - DO
 - Add better error handling (student page)
 - Fix error returned from smart contract
-- Deploy smart contract to a test network
-- Add loading elements to pages waiting on elements to load
 
 # Dependencies used
 -  "@babel/plugin-transform-modules-commonjs": "^7.2.0",
@@ -56,6 +55,9 @@ Businesses can retrieve and view this document in order to verify a students' cr
 -   "truffle": "5.0.5",
 -   "truffle-contract": "4.0.6",
 -   "truffle-hdwallet-provider": "^1.0.5"
+
+# Kovan network
+This smart contract is deployed to the Kovan test network at the address 0x772E24532a39A7D0f55544316514d54a53Dc2b18
 
 
 # Licences
