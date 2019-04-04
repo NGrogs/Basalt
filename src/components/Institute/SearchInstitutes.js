@@ -19,6 +19,7 @@ class SearchInstitutes extends Component {
         canReview: false,
         reviewText: '',
         reviews: [],
+        detailsFound: false,
     }
 
     /* updates fields when changed */
@@ -42,7 +43,8 @@ class SearchInstitutes extends Component {
                     region: child.val().Region,
                     country: child.val().country,
                     publicEthKey: child.val().EthKey,
-                    canReview: true
+                    canReview: true,
+                    detailsFound: true
                 })
             })
         })
@@ -140,8 +142,21 @@ class SearchInstitutes extends Component {
 
     render() {
         return (
-            <div align="center"className="container">
-                <br/><br/>
+            !this.state.detailsFound ? 
+            <div align="center"className="container" style={{paddingTop: '3em'}}> 
+                <h1> Search for an institute </h1><br/>
+
+                <div align="center">
+                    <form>
+                        <div className="form-group " style={{width: "40%"}}>
+                            <input value={this.state.key} onChange={this.handleChange} className="form-control" id="key" type="text" name="key" placeholder="Institute ID" required/> 
+                        </div>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getInstitutes}> Search </button>
+                    </form>
+                </div>
+            </div> :
+
+            <div align="center"className="container" style={{paddingTop: '3em'}}>
                 <h1> Search for an institute </h1><br/>
 
                 <div align="center">
