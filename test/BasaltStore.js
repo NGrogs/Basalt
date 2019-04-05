@@ -1,3 +1,4 @@
+/* This file tests the functionality of the smart contract BasaltStore.sol */
 const Basalt = artifacts.require('./BasaltStore.sol');
 
 contract('Basalt', (accounts)=> {
