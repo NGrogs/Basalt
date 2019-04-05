@@ -32,22 +32,30 @@ class SearchInstitutes extends Component {
     /* Find selected institute in Firebase database */
     getInstitutes = async(e) => {
         e.preventDefault()
-        var _key = this.state.instituteName
-        const loc = firebase.database().ref('/users' + _key)
+        var _key = this.state.key
+        const loc = firebase.database().ref('/users/' + _key)
+        console.log(loc)
         loc.once('value', snapshot => {
-            snapshot.forEach(child => {
-                console.log(child.val())
+            if(snapshot.exists()){
+                console.log('exists')
                 this.setState({
-                    email: child.val().email,
-                    instituteName: child.val().organizationName,
-                    instituteType: child.val().organizationType,
-                    region: child.val().Region,
-                    country: child.val().country,
-                    publicEthKey: child.val().EthKey,
+                    email: snapshot.child('email').val(),
+                    instituteName: snapshot.child('organizationName').val(),
+                    instituteType: snapshot.child('organizationType').val(),
+                    region: snapshot.child('Region').val(),
+                    country: snapshot.child('country').val(),
+                    publicEthKey: snapshot.child('EthKey').val(),
                     canReview: true,
                     detailsFound: true
                 })
-            })
+            }
+            else {
+                this.setState({
+                    canReview: false,
+                    detailsFound: false
+                })
+                alert("No Institute Found")
+            }
         })
         this.setState({user: firebase.auth().currentUser})
        // console.log(this.state.user)

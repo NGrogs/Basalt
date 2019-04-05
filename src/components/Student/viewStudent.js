@@ -33,18 +33,28 @@ class viewStudent extends Component {
         const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber)
 
         loc.once('value').then(snapshot => {
-            var blockchainKey = snapshot.child("blockchainKey").val()
-            var courseCode = snapshot.child("courseCode").val()
-            var courseName = snapshot.child("courseName").val()
-            var studentName = snapshot.child("studentName").val()
 
-            this.setState({
-                blockID: blockchainKey,
-                courseCode: courseCode,
-                courseName: courseName,
-                studentName: studentName,
-                detailsFound: true
-            })
+            if(snapshot.exists()) {
+                var blockchainKey = snapshot.child("blockchainKey").val()
+                var courseCode = snapshot.child("courseCode").val()
+                var courseName = snapshot.child("courseName").val()
+                var studentName = snapshot.child("studentName").val()
+
+                this.setState({
+                    blockID: blockchainKey,
+                    courseCode: courseCode,
+                    courseName: courseName,
+                    studentName: studentName,
+                    detailsFound: true
+                })
+            }
+            else {
+                this.setState({
+                    detailsFound: false
+                })
+                alert("No Student Found")
+            }
+            
         })
     }
 
