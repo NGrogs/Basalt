@@ -16,6 +16,7 @@ class Login extends Component {
         })
     }
 
+    /* login the user */
     login = (e) => {
         e.preventDefault();
         var _email = this.state.email
@@ -29,23 +30,21 @@ class Login extends Component {
             // New sign-in will be persisted with session persistence.
             return firebase.auth().signInWithEmailAndPassword(_email, _password).then(
                 (u)=>{ (
+                    // send user to index page
                     this.props.history.push('/')
                 )
                 }).catch((error) => {
-                   // console.log(error);
                     alert("invalid login details")
+                    // return user to login page
                     this.props.history.push('/login')
                 })
             })
         .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-       // console.log(errorCode)
-       // console.log(errorMessage)
+        // Handle Errors here
     });
     }
 
+    // sends email to user to reset their password
     resetPassword = async() => {
         firebase.auth().sendPasswordResetEmail(this.state.email).then(function() {
             alert("An email has been sent allowing you to reset your password")

@@ -23,13 +23,13 @@ class viewStudent extends Component {
         })
     }
 
-
+    /* Search firebase database for student details */
     findStudent = (e) => {
         e.preventDefault()
         var _studentNumber = this.state.StudentNumber
         var _uid = this.state.uid
         
-        // get reference to database location we want
+        // get reference to database location we want students/currentUser/studentNumber
         const loc = firebase.database().ref('/students/' + _uid + '/' + _studentNumber)
 
         loc.once('value').then(snapshot => {

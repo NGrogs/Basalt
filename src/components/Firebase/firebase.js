@@ -2,6 +2,9 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 
+/** database details and keys for Firebase database
+ *  Real values are stored in .env file
+*/
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,

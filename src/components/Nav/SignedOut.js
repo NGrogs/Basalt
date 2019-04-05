@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-//import "bootstrap/dist/css/bootstrap.css";
+import { NavLink, withRouter} from 'react-router-dom'
 import {NavItem} from 'react-bootstrap';
 
+/* navigation options for unauthenticated users */
 const SignedOut = () => {
     return (
         <React.Fragment>
@@ -12,4 +12,4 @@ const SignedOut = () => {
     )
 }
 
-export default SignedOut
+export default withRouter(SignedOut)

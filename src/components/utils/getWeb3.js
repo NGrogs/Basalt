@@ -1,3 +1,6 @@
+/** this code was provided by truffle in a package which gave an example of using react with truffle 
+ * https://truffleframework.com/boxes/react */ 
+
 import Web3 from "web3";
 
 const getWeb3 = () =>

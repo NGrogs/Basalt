@@ -29,6 +29,7 @@ class SearchInstitutes extends Component {
         })
     }
 
+    /* Find selected institute in Firebase database */
     getInstitutes = async(e) => {
         e.preventDefault()
         var _key = this.state.instituteName
@@ -66,7 +67,7 @@ class SearchInstitutes extends Component {
         }
     }
 
-    // adds rating to firebase database
+    /* adds rating to firebase database */
     addReview = async() => {
         //check user has given a star rating
         if(this.state.rating <= 0){
@@ -99,6 +100,7 @@ class SearchInstitutes extends Component {
         }
     }
 
+    /* Find reviews in firebase database for selected institute */
     getReviews = async (e) => {
         e.preventDefault()
         if(this.state.canReview){

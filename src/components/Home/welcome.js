@@ -82,9 +82,6 @@ class Welcome extends Component {
                         </h5>
                     </div>
                 </div>
-
-
-                
             </div>
         )
     }

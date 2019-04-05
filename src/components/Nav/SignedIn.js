@@ -1,11 +1,10 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import {NavItem} from 'react-bootstrap';
 import firebase from '../Firebase/firebase';
 
+/* navigation options for authenticated users */
 const SignedIn = () => {
-
     return (
         <React.Fragment>
             <NavItem><NavLink to='/FileUpload' style={{color: 'white', fontSize: '1.5em', display: 'block'}} activeStyle={{fontWeight: "bold",color: "#121212"}}>File Upload</NavLink></NavItem>

@@ -12,9 +12,7 @@ class myAccount extends Component {
         organizationType: '',
         organizationName: '',
         publicEthKey: '',
-
         reviews: [],
-
         loading: true,
     }
 
@@ -37,6 +35,7 @@ class myAccount extends Component {
             const loc = firebase.database().ref('/users/' + _uid)
             loc.once('value', snapshot => {
                 snapshot.forEach(child => {
+                    //update the state variables to have the values from database
                     this.setState({
                         email: child.val().email,
                         country: child.val().country,
@@ -46,6 +45,7 @@ class myAccount extends Component {
                         publicEthKey: child.val().EthKey
                     })
                 })
+                // displays the account information
                 this.setState({loading: false})
             })
         }
@@ -57,30 +57,18 @@ class myAccount extends Component {
         const loc2 = firebase.database().ref('/reviews/' + _uid)
         var theReviews = []
         loc2.once('value', snapshot => {
-            //var _reviewer = snapshot.key
-            //console.log(_reviewer)
-            //console.log(snapshot)
-            //console.log(snapshot.key)
             var i = 0;
             snapshot.forEach(child => {
                 var theVal = child.val()
-                //console.log("key is" + child.key)
                 theReviews.push(theVal)
                 var _reviewer = child.key
                 var _date = theReviews[i].date
                 var _rating = theReviews[i].rating
                 var _text = theReviews[i].text
-                //console.log(_date)
-                //console.log(_rating)
-                //console.log(_text)
                 i++
                 this.setState({reviews: this.state.reviews.concat([_reviewer, _date, _rating, _text])})
-                //this.setState({reviews: [this.state.reviews, _reviewer, _date, _rating, _text]})
-
             })
         })
-    
-        //this.setState({reviews: [this.state.reviews, theReviews]})
     }
 
     

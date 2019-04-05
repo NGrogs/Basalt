@@ -27,6 +27,7 @@ class App extends Component {
         account: '0x0',
     }
 
+    // checks if a user's auth status has changes i.e. logged in or out
     authListener() {
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
@@ -40,9 +41,11 @@ class App extends Component {
         });
     }
 
+    // runs when the page loads
     componentDidMount = async () =>{
         this.authListener()
 
+        // enable the web3 library
         const Web3 = await getWeb3();
         this.setState({web3: Web3})
         // get contract address
