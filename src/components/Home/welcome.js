@@ -71,13 +71,13 @@ class Welcome extends Component {
                     <div className="col">
                         <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Contact </h2> 
                         <h5 style={{backgroundColor: '#e6e4e2'}}>
-                            If you wish to contact me, please email me at <br/> ngrogan15@gmail.com <br/>
+                            If you wish to contact me, please email me at: <br/><br/> ngrogan15@gmail.com <br/><br/>
                         </h5>
                     </div>
                     <div className="col">
                         <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Thanks </h2>
                         <h5 style={{backgroundColor: '#e6e4e2'}}>
-                            Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a>  <br/>
+                            Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a>  <br/><br/>
                             Lecturer Patrick Tobin
                         </h5>
                     </div>
