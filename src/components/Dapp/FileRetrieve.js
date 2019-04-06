@@ -80,7 +80,7 @@ class FileRetrieve extends Component {
             !this.state.detailsFound ? 
             <div align="center"className="container" style={{paddingTop: '3em'}}>
             <div className="col-sm"> 
-                    <h2>Enter key to search:</h2>
+                    <h2>Enter key to search:</h2><br/>
                     <form>
                         <div className="form-group " style={{width: "40%"}}>
                             <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>
@@ -92,7 +92,7 @@ class FileRetrieve extends Component {
             
             <div align="center"className="container" style={{paddingTop: '3em'}}>
                 <div className="col-sm"> 
-                    <h2>Enter key to search:</h2>
+                    <h2>Enter key to search:</h2><br/>
                     <form>
                         <div className="form-group " style={{width: "40%"}}>
                             <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>

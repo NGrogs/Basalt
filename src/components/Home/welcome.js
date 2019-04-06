@@ -55,7 +55,7 @@ class Welcome extends Component {
                 <br/><br/><br/><br/>
                 <div className="row">
                     <div className="col">
-                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Help </h2> <br/>
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Help </h2> 
                         <h5 style={{textAlign: 'left', backgroundColor: '#e6e4e2'}}>
                             If you having any issues with this application, try refreshing a page, 
                             this may trigger Metamask in the event it didn't start correctly <br/><br/>
@@ -69,13 +69,13 @@ class Welcome extends Component {
                         </h5>
                     </div>
                     <div className="col">
-                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Contact </h2> <br/>
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Contact </h2> 
                         <h5 style={{backgroundColor: '#e6e4e2'}}>
                             If you wish to contact me, please email me at <br/> ngrogan15@gmail.com <br/>
                         </h5>
                     </div>
                     <div className="col">
-                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Thanks </h2> <br/>
+                        <h2 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}> Thanks </h2>
                         <h5 style={{backgroundColor: '#e6e4e2'}}>
                             Logo made with <a href="https://www.designevo.com/en/" title="Free Online Logo Maker">DesignEvo</a>  <br/>
                             Lecturer Patrick Tobin

@@ -106,25 +106,25 @@ class myAccount extends Component {
                 <br/>                
                 <div className="row">
                     <div className="col-sm">
-                        <h4>Email: {this.state.email}</h4>
+                        <h4><b>Email:</b> {this.state.email}</h4>
                     </div>
                     <div className="col-sm">
-                        <h4>Organization Name: {this.state.organizationName}</h4>
+                        <h4><b>Organization Name:</b> {this.state.organizationName}</h4>
                     </div>
                     <div className="col-sm">
-                        <h4>Country: {this.state.country}</h4>
+                        <h4><b>Country:</b> {this.state.country}</h4>
                     </div>
                 </div>
                 <br/><br/>
                 <div className="row">
                     <div className="col-sm" >
-                        <h4>Public Ethereum Key: {this.state.publicEthKey}</h4>
+                        <h4><b>Metamask ID:</b> {this.state.publicEthKey}</h4>
                     </div>
                     <div className="col-sm">
-                        <h4>Organization Type: {this.state.organizationType}</h4>
+                        <h4><b>Organization Type:</b> {this.state.organizationType}</h4>
                     </div>
                     <div className="col-sm">
-                        <h4>Region: {this.state.region}</h4>
+                        <h4><b>Region:</b> {this.state.region}</h4>
                     </div>
                 </div>
 

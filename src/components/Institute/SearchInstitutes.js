@@ -186,13 +186,13 @@ class SearchInstitutes extends Component {
 
                 <div className="row">
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Institute Name: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Institute Name </h3>
                     </div>
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Institute Type: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Institute Type </h3>
                     </div>
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Country: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Country </h3>
                     </div>
                 </div>
 
@@ -209,15 +209,17 @@ class SearchInstitutes extends Component {
                     
                 </div>
 
+                <br/><br/>
+
                 <div className="row">
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Region: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Region </h3>
                     </div>
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Email: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Email </h3>
                     </div>
                     <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>public Ethereum Key: </h3>
+                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>Metamask ID </h3>
                     </div>
                 </div>
                 
