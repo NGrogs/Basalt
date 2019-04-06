@@ -21,6 +21,7 @@ class Signup extends Component {
         })
     }
 
+    /* updates dropdown when changed */
     dropChange = (e) => {
         this.setState({
             organizationType: e.target.value 

@@ -182,7 +182,7 @@ class FileUpload extends Component {
                 <form>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Choose a file to upload</label>
-                        <input value={this.state.name} onChange={this.getFile} className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
+                        <input value={this.state.name} onChange={this.getFile} accept=".pdf" className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
                     </div>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
