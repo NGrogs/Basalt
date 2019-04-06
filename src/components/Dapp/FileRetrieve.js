@@ -119,7 +119,7 @@ class FileRetrieve extends Component {
 
                     <CopyToClipboard text={this.state.institiuteID}
                         onCopy={() => this.setState({copied: true})}>
-                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy Institute ID</button>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy uploader's ID</button>
                     </CopyToClipboard>
 
                     {this.state.copied ? <span style={{color: '#B65DF3', paddingLeft: '3em'}}>Copied.</span> : null}

@@ -35,6 +35,7 @@ Businesses can retrieve and view this document in order to verify a students' cr
 -   "react-bootstrap": "^1.0.0-beta.5",
 -   "react-copy-to-clipboard": "^5.0.1",
 -   "react-dom": "^16.8.4",
+-   "react-pdf": "^4.0.5",
 -   "react-router-dom": "^4.3.1",
 -   "react-scripts": "^2.1.8",
 -   "react-star-ratings": "^2.3.0",
