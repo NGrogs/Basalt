@@ -21,6 +21,12 @@ class Signup extends Component {
         })
     }
 
+    dropChange = (e) => {
+        this.setState({
+            organizationType: e.target.value 
+        })
+    }
+
     /* add new user and create database reference */
     signup = (e) => {
         e.preventDefault();
@@ -78,7 +84,10 @@ class Signup extends Component {
                 <div className="col-sm">
                     <div className="form-group" style={{width: "60%"}}>
                         <label> Organization Type </label>
-                        <input  value={this.state.organizationType} onChange={this.handleChange} className="form-control" id="organizationType" type="text" name="organizationType" placeholder="Are you a college or a business?" required/>
+                        <select className="form-control" id="organizationType" name="organizationType" onChange={this.dropChange} value={this.state.organizationType} required>
+                            <option value="educational institute"> Educational Institute </option>
+                            <option value="business"> Business </option>
+                        </select>
                     </div>
                 </div>
                 <div className="col-sm">
