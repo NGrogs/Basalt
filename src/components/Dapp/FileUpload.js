@@ -153,13 +153,13 @@ class FileUpload extends Component {
             <div align="center"className="container" onLoad={this.componentDidMount}>
                 <h1> File Upload </h1><br/>
                 <h5 style={{fontStyle: "italic"}}>( Please make sure you give this page access to your MetaMask! )</h5><br/>
-
-            
+                
                 <form>
                     <div className="form-group " style={{width: "40%"}}>
-                        <label>Choose a file to upload</label>
+                        <label>Please upload a PDF file with your student's details</label>
                         <input value={this.state.name} onChange={this.getFile} accept=".pdf" className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} id="file" type="file" name="file" required/>
                     </div>
+                    <br/>
                     <div className="form-group " style={{width: "40%"}}>
                         <label>Student Name</label>
                         <input value={this.state.StudentName} onChange={this.handleChange} className="form-control" id="StudentName" type="text" name="StudentName" placeholder="Student Name" required/>
