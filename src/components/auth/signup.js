@@ -37,27 +37,30 @@ class Signup extends Component {
         firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password).then(
                 // 2: add a db document with additional details
-                function success(userCredential){
-                    var userData = userCredential.user
-                    var uid = userData.uid
-                    db.ref().child("users").child(uid).set(
+                (userCredential)=>{ (
+                    db.ref().child("users").child(userCredential.user.uid).set(
                         {   email: _email, 
                             organizationName: _organizationName, 
                             organizationType: _organizationType,
                             country: _country,
                             Region: _region,
                             EthKey: _ethKey
-                        }
-                    );
-                    // 3: send user to login page
-                    this.props.history.push('/login')
-                }).catch((error) => {
-                console.log(error);
-                alert("invalid signup details")
-                this.props.history.push('/signup')
-            })
+                        },
+                         // 3: send user to login page
+                        this.props.history.push('/')
+                    )
+                    ).catch((error) => {
+                        console.log(error);
+                        alert("invalid signup details")
+                        this.props.history.push('/signup')
+                    })
         
-    }
+                }).catch((error) => {
+                    console.log(error);
+                    alert("invalid signup details")
+                    this.props.history.push('/signup')
+                })
+}
 
     /* renders the app */
     render() {
