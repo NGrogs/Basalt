@@ -4,7 +4,6 @@ import storehash from '../IPFS/storehash';
 import ipfs from '../IPFS/IPFS';
 import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
-import { resolve } from 'multiaddr';
 const uniqueRandom = require('unique-random');
 
 class FileUpload extends Component {
@@ -69,59 +68,36 @@ class FileUpload extends Component {
 
     /* store IPFS link on blockchain */
     addToBlockchain = async(_ipfsLink, _key) => {
-        
-           /* const rand = uniqueRandom(1, 10000000)
-            var key = rand()
-            console.log(key)*/
-
             let newDate = new Date()
             newDate = newDate.getTime()
             var _account = this.state.account[0]
             var _uid = this.state.uid
 
+            /* call smart contract store document method */
             await storehash.methods.sendDocument(_ipfsLink, newDate, _key, _uid).send({from: _account})
-            /*.then( () =>{
-                var _uid = this.state.uid
-                var _studentName = this.state.StudentName
-                var _studentNumber = this.state.StudentNumber
-                var _courseCode = this.state.CourseCode
-                var _courseName = this.state.CourseName
-                var _idForBlockchain = _key
-
-                const db = firebase.database()
-                db.ref().child("students").child(_uid).child(_studentNumber).set(
-                    {   
-                        studentName: _studentName,
-                        courseCode: _courseCode,
-                        courseName: _courseName,
-                        blockchainKey: _idForBlockchain 
-                    }
-                );
-                
-                alert("Student added")
-            })*/
-
-            return (_key)
         
     }
 
-    //// fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /** 
+     * 1: Generates a key
+     * 2: Adds the file to IPFS 
+     * 3: Creates Firebase database entry for student
+     * 4: Adds reference to Blockchain
+     * */ 
     AddMyStuff = async (e) => {
         e.preventDefault()
+        // Generates a random key
         const rand = uniqueRandom(1, 10000000)
         var key = rand()
-        this.setState({idForBlockchain: key})
-        console.log(key)
 
+        this.setState({idForBlockchain: key})
 
         const ipfsHash = await this.pushToIPFS()
-        //await this.createStudent()
         await this.createStudent(key)
-        const _key = await this.addToBlockchain(ipfsHash, key)
-        //await this.createStudent(_key)
+        await this.addToBlockchain(ipfsHash, key)
     }
 
-    // add a student record to the database
+    /* add a student record to the database */
     createStudent = async(_key) => {
         //get student details from state variables & current user uid
         var _uid = this.state.uid
