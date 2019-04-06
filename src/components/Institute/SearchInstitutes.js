@@ -117,17 +117,22 @@ class SearchInstitutes extends Component {
             const loc2 = firebase.database().ref('/reviews/' + _keySearch)
             var theReviews = []
             loc2.once('value', snapshot => {
-                var i = 0;
-                snapshot.forEach(child => {
-                    var theVal = child.val()
-                    theReviews.push(theVal)
-                    var _reviewer = child.key
-                    var _date = theReviews[i].date
-                    var _rating = theReviews[i].rating
-                    var _text = theReviews[i].text
-                    i++
-                    this.setState({reviews: this.state.reviews.concat([_reviewer, _date, _rating, _text])})
-                })
+                if(snapshot.exists()) {
+                    var i = 0;
+                    snapshot.forEach(child => {
+                        var theVal = child.val()
+                        theReviews.push(theVal)
+                        var _reviewer = child.key
+                        var _date = theReviews[i].date
+                        var _rating = theReviews[i].rating
+                        var _text = theReviews[i].text
+                        i++
+                        this.setState({reviews: this.state.reviews.concat([_reviewer, _date, _rating, _text])})
+                    })
+                } 
+                else {
+                    alert("No Reviews Found")
+                }
             })
         }
         else {
