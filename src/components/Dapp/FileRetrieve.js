@@ -3,6 +3,8 @@ import firebase from '../Firebase/firebase';
 import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { Document, Page, pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 class FileRetrieve extends Component {
 
     state = {
@@ -14,6 +16,8 @@ class FileRetrieve extends Component {
         institiuteID: '',
         copied: false,
         detailsFound: false,
+        numPages: null,
+        pageNumber: 1,
     }
 
     /* updates fields when changed */
@@ -65,7 +69,13 @@ class FileRetrieve extends Component {
             }.bind(this))
         }  
 
+
+    onDocumentLoadSuccess = ({ numPages }) => {
+        this.setState({ numPages });
+        }
+
     render = () => { 
+        const { pageNumber, numPages } = this.state;
         return (
             !this.state.detailsFound ? 
             <div align="center"className="container" style={{paddingTop: '3em'}}>
@@ -107,23 +117,22 @@ class FileRetrieve extends Component {
                     </div>
                 <br/><br/>
 
-                    <CopyToClipboard text={"https://ipfs.io/ipfs/" + this.state.IPFSlink}
+                    <CopyToClipboard text={this.state.institiuteID}
                         onCopy={() => this.setState({copied: true})}>
-                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy IPFS key</button>
+                        <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}}>Copy Institute ID</button>
                     </CopyToClipboard>
 
                     {this.state.copied ? <span style={{color: '#B65DF3', paddingLeft: '3em'}}>Copied.</span> : null}
                 </div>
-                
-                <br/><br/><br/><br/>
-                <div className="row">
-                    <div className="col-sm">
-                        <h3 className="text-white" style={{backgroundColor: '#B65DF3', padding: '.2em'}}>What do I do with this IPFS link?</h3>
-                        <br/>
-                        <h4>
-                            Enter the link into your searchbar and you will be able to download the file
-                        </h4>
-                    </div>
+
+                <div align="center"className="container" style={{paddingTop: '3em', borderColor: 'black'}}>
+                <Document
+                    file = {"https://ipfs.io/ipfs/" + this.state.IPFSlink}
+                    onLoadSuccess={this.onDocumentLoadSuccess}
+                    >
+                    <Page pageNumber={pageNumber} />
+                </Document>
+                <p>Page {pageNumber} of {numPages}</p>
                 </div>
                 <br/><br/><br/><br/><br/><br/>
                 <div className="row">
