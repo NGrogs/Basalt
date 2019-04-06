@@ -43,8 +43,8 @@ class FileRetrieve extends Component {
             this.setState({detailsFound: false})
         }
         else {
-          //  var seconds = this.state.documentDetails[2]
-         //   var date = new Date(seconds);
+            //  var seconds = this.state.documentDetails[2]
+            //  var date = new Date(seconds);
             this.setState({IPFSlink: this.state.documentDetails[0]})
             this.setState({uploadedAddress: this.state.documentDetails[1]})
             this.setState({institiuteID: this.state.documentDetails[3]})
@@ -85,7 +85,6 @@ class FileRetrieve extends Component {
                         <div className="form-group " style={{width: "40%"}}>
                             <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>
                         </div>
-
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.retrieveDocument}> Find Document! </button>
                     </form>
                 </div>
@@ -98,7 +97,6 @@ class FileRetrieve extends Component {
                         <div className="form-group " style={{width: "40%"}}>
                             <input value={this.state.idToSearch} onChange={this.handleChange} className="form-control" id="idToSearch" type="text" name="idToSearch" placeholder="ID" required/>
                         </div>
-
                         <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.retrieveDocument}> Find Document! </button>
                     </form>
                 </div>

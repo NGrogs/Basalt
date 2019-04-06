@@ -21,7 +21,6 @@ Businesses can retrieve and view this document in order to verify a students' cr
 - React JS
 
 # To - DO
-- Add better error handling (student page)
 - Fix error returned from smart contract
 
 # Dependencies used
