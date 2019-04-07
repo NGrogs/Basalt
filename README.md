@@ -11,6 +11,8 @@ Colleges upload documents containing details of a student/graduates' academic de
 
 Businesses can retrieve and view this document in order to verify a students' credentials.
 
+# Live Version
+https://basalt-b3c19.firebaseapp.com/
 
 # Technologies
 - Solidity
