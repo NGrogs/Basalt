@@ -1,3 +1,7 @@
+/**
+ *  Author: Neil Grogan C00205522
+ */
+
 import React, {Component} from 'react';
 import { withRouter, BrowserRouter, Switch, Route} from 'react-router-dom';
 import firebase from './components/Firebase/firebase';
