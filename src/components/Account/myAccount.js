@@ -2,22 +2,28 @@ import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import { withRouter } from 'react-router-dom';
 import logoSmall from '../../Images/logoSmall.png';
+
+/** 
+ *  This component displays the account details of the current user
+ *  These details are retrieved from a firebase database
+*/
 class myAccount extends Component {
     state = {
         user: '',
         uid: '',
+
         email: '',
         country: '',
         region: '',
         organizationType: '',
         organizationName: '',
         publicEthKey: '',
+
         reviews: [],
         loading: true,
     }
 
     componentDidMount = async () => {
-
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 // User is signed in.
@@ -31,11 +37,11 @@ class myAccount extends Component {
             }.bind(this))
             var _uid = this.state.uid
 
-            // get reference to database location we want
+            /* Get users details from database */
             const loc = firebase.database().ref('/users/' + _uid)
             loc.once('value', snapshot => {
                 snapshot.forEach(child => {
-                    //update the state variables to have the values from database
+                    /* update the state variables to have the values from database */
                     this.setState({
                         email: child.val().email,
                         country: child.val().country,
@@ -45,11 +51,12 @@ class myAccount extends Component {
                         publicEthKey: child.val().EthKey
                     })
                 })
-                // displays the account information
+                /* displays the account information */
                 this.setState({loading: false})
             })
         }
 
+    /* Get the reviews for the current user from database */
     getReviews = async (e) => {
         e.preventDefault()
         var _uid = this.state.uid
@@ -77,7 +84,6 @@ class myAccount extends Component {
         })
     }
 
-    
     render() {
         return (
 

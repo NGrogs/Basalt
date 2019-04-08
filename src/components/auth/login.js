@@ -3,6 +3,10 @@ import firebase from '../Firebase/firebase';
 import logo from '../../Images/logoOGG.png';
 import { withRouter } from 'react-router-dom';
 
+/**
+ *  This component handles logging in the user
+ *  User can also request a password reset
+ */
 class Login extends Component {
         state = {
             email: '',
@@ -44,7 +48,7 @@ class Login extends Component {
     });
     }
 
-    // sends email to user to reset their password
+    /* sends email to user to reset their password */
     resetPassword = async() => {
         firebase.auth().sendPasswordResetEmail(this.state.email).then(function() {
             alert("An email has been sent allowing you to reset your password")

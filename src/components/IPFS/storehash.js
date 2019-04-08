@@ -2,10 +2,16 @@
 import Web3 from 'web3';
 const web3 = new Web3(window.web3.currentProvider);
 
-//contarct address
+/**
+ * This file stores the address and abi of our smart contract
+ * These values will need to be updated if a smart contract is changed and recompiled
+ */
+
+/* contract address */
 const Kovanaddress = '0x772E24532a39A7D0f55544316514d54a53Dc2b18';
 const address = '0x1309CB274a7d16d489EDCb13424CAeED3f88AE16';
-//contract abi 
+
+/* contract abi */
 const abi = [
   {
     "constant": true,

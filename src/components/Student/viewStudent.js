@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 import { withRouter } from 'react-router-dom';
 
+/**
+ * This component allows a user to search for one of their students
+ */
 class viewStudent extends Component {
     state = {
         user: '',

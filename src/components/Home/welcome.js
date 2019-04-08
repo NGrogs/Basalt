@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import logo from '../../Images/logoOGG.png';
+/**
+ *  This is the main component or index page 
+ *  This component explains the application and how to use it
+ */
 class Welcome extends Component {
     
     render() {

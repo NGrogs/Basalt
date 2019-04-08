@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase/firebase';
 
+/**
+ *  This component creates a new user in firebase Auth service
+ *  Also creates new database entry for additional user information
+ */
 class Signup extends Component {
     
         state = {

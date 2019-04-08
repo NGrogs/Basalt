@@ -3,7 +3,9 @@ import { NavLink, withRouter } from 'react-router-dom';
 import {NavItem} from 'react-bootstrap';
 import firebase from '../Firebase/firebase';
 
-/* navigation options for authenticated users */
+/**
+ *  navigation options for authenticated users 
+*/
 const SignedIn = () => {
     return (
         <React.Fragment>

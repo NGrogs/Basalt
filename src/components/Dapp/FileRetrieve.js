@@ -4,18 +4,28 @@ import storehash from '../IPFS/storehash';
 import { withRouter } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Document, Page, pdfjs } from 'react-pdf';
+
+/** Assign a service worker for the react-pdf library */
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
+/**
+ *  This component handles the retrieval of IPFS links from the Blockchain
+ *  and pdfs from IPFS.
+ *  This component also displays the pdf in page via the react-pdf library
+ */
+
 class FileRetrieve extends Component {
 
     state = {
-        // variables of document retrieved
         idToSearch: '',
         documentDetails: [],
         IPFSlink: null,        
         uploadedAddress: '',
         institiuteID: '',
+
         copied: false,
         detailsFound: false,
+
         numPages: null,
         pageNumber: 1,
     }
@@ -27,13 +37,13 @@ class FileRetrieve extends Component {
         })
     }
 
-    //gets a document back from the Blockchain
+    /* gets a document back from the Blockchain */
     retrieveDocument = async (e) => {
         e.preventDefault()
         var _id = this.state.idToSearch
         this.state.documentDetails = await storehash.methods.getDocument(_id).call().catch(console.error);
 
-        //check response is empty
+        /* check response is empty */
         if(!this.state.documentDetails[0].length){
             alert("No entry found")
             this.setState({IPFSlink: ''})
@@ -50,8 +60,6 @@ class FileRetrieve extends Component {
             this.setState({institiuteID: this.state.documentDetails[3]})
             this.setState({canReview: true})
             this.setState({detailsFound: true})
-
-            //grab institite that uploaded file
         }
     }
 
@@ -69,7 +77,7 @@ class FileRetrieve extends Component {
             }.bind(this))
         }  
 
-
+    /* When pdf loads get the number of pages in file */
     onDocumentLoadSuccess = ({ numPages }) => {
         this.setState({ numPages });
         }

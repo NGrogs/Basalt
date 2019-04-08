@@ -3,6 +3,11 @@ import firebase from '../Firebase/firebase';
 import { withRouter } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 
+/**
+ *  This component allows a user to search for another user
+ *  Displays reviews for a selected user
+ *  Allows user to submit a review of selected user
+ */
 class SearchInstitutes extends Component {
     state = {
         user: '',
@@ -58,12 +63,10 @@ class SearchInstitutes extends Component {
             }
         })
         this.setState({user: firebase.auth().currentUser})
-       // console.log(this.state.user)
         this.setState({uid : firebase.auth().currentUser.uid})
-        //console.log(this.state.uid)
     }
 
-    // changes the star rating
+    /* changes the star rating if user found */
     changeRating = async( newRating, name ) =>{
         if(this.state.canReview){
             this.setState({
@@ -141,7 +144,6 @@ class SearchInstitutes extends Component {
     }
 
     componentDidMount = async () => {
-
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 // User is signed in.

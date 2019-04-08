@@ -2,7 +2,9 @@ import React from 'react'
 import { NavLink, withRouter} from 'react-router-dom'
 import {NavItem} from 'react-bootstrap';
 
-/* navigation options for unauthenticated users */
+/**
+ * navigation options for unauthenticated users
+*/
 const SignedOut = () => {
     return (
         <React.Fragment>

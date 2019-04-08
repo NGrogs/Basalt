@@ -1,6 +1,12 @@
 /** this code was provided by truffle in a package which gave an example of using react with truffle 
  * https://truffleframework.com/boxes/react */ 
 
+
+/**
+ * This file allows us to use the web3 library to interact with metamask and connect to a blockchain
+ * 
+ */
+
 import Web3 from "web3";
 
 const getWeb3 = () =>

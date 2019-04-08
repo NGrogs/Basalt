@@ -6,6 +6,10 @@ import getWeb3 from "../utils/getWeb3";
 import { withRouter } from 'react-router-dom';
 const uniqueRandom = require('unique-random');
 
+/**
+ *  This component uploads pdfs to IPFS and saves the link to the Blockchain
+ *  Also creates a firebase database entry for student
+ */
 class FileUpload extends Component {
     constructor(props) {
         super(props);
@@ -86,7 +90,7 @@ class FileUpload extends Component {
      * */ 
     AddMyStuff = async (e) => {
         e.preventDefault()
-        // Generates a random key
+        /* Generates a random key */
         const rand = uniqueRandom(1, 10000000)
         var key = rand()
 
@@ -123,7 +127,7 @@ class FileUpload extends Component {
     }
 
     componentDidMount = async () => {
-    //check user is logged in
+    /* check user is logged in */
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -136,17 +140,16 @@ class FileUpload extends Component {
         }
         }.bind(this))
 
-    //initialize web3
+    /* initialize web3 */
     const web3 = await getWeb3();
 
-    // get contract address
+    /* get contract address */
     const ethAddress = await storehash.options.address
     this.setState({ethAddress})
 
-    //set account for Blockchain network
+    /* set account for Blockchain network */
     this.setState({account: await web3.eth.getAccounts()})
     }
-
 
     render = () => { 
         return (

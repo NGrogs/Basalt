@@ -19,40 +19,38 @@ import SearchInstitute from './components/Institute/SearchInstitutes';
 class App extends Component {
     state = {
         user: {},
-        // web3 library for connecting to a blockchain network
+        /* web3 library for connecting to a blockchain network */
         web3: '',
-        //ethereum smart contract address
+        /* ethereum smart contract address */
         ethAddress: '',
-        //metamask account
+        /* metamask account */
         account: '0x0',
     }
 
-    // checks if a user's auth status has changes i.e. logged in or out
+    /* checks if a user's auth status has changes i.e. logged in or out */
     authListener() {
         firebase.auth().onAuthStateChanged((user) => {
             if(user) {
                 this.setState({user});
-              //  this.props.history.push('/')
             }
             else {
                 this.setState({user: null});
-               // this.props.history.push('/')
             }
         });
     }
 
-    // runs when the page loads
+    /* runs when the page loads */
     componentDidMount = async () =>{
         this.authListener()
 
-        // enable the web3 library
+        /* enable the web3 library */
         const Web3 = await getWeb3();
         this.setState({web3: Web3})
-        // get contract address
+        /* get contract address */
         const ethAddress = await storehash.options.address
         this.setState({ethAddress})
 
-        //set account for Blockchain network
+        /* set account for Blockchain network */
         this.setState({account: await Web3.eth.getAccounts()})
     }
 

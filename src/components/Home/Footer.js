@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 
+/**
+ *  This component is a footer that attaches to the bottom of each page
+ */
 class Footer extends Component {
-    state = {
-    }
-
     render() {
         return (
             <footer className="footer text-center pt-5 pb-2 fixed-bottom" style={{backgroundColor: '#B65DF3'}}>
