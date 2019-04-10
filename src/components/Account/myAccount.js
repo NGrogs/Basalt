@@ -35,25 +35,6 @@ class myAccount extends Component {
                 this.props.history.push('/login')
             }
             }.bind(this))
-            var _uid = this.state.uid
-
-            /* Get users details from database */
-            const loc = firebase.database().ref('/users/' + _uid)
-            loc.once('value', snapshot => {
-                snapshot.forEach(child => {
-                    /* update the state variables to have the values from database */
-                    this.setState({
-                        email: child.val().email,
-                        country: child.val().country,
-                        region: child.val().Region,
-                        organizationName: child.val().organizationName,
-                        organizationType: child.val().organizationType,
-                        publicEthKey: child.val().EthKey
-                    })
-                })
-                /* displays the account information */
-                this.setState({loading: false})
-            })
         }
 
     /* Get the reviews for the current user from database */
@@ -84,6 +65,27 @@ class myAccount extends Component {
         })
     }
 
+    /* Get details for current user */
+    getDetails = async (e) => {
+        e.preventDefault()
+        var _uid = this.state.uid
+        /* Get users details from database */
+        const loc = firebase.database().ref('/users/' + _uid)
+        loc.once('value', snapshot => {
+                this.setState({
+                    email: snapshot.child('email').val(),
+                    organizationName: snapshot.child('organizationName').val(),
+                    organizationType: snapshot.child('organizationType').val(),
+                    region: snapshot.child('Region').val(),
+                    country: snapshot.child('country').val(),
+                    publicEthKey: snapshot.child('EthKey').val()
+                })
+            /* displays the account information */
+            this.setState({loading: false})
+        })
+
+    }
+
     render() {
         return (
 
@@ -91,7 +93,8 @@ class myAccount extends Component {
                 <br/><br/>
                 <img src={logoSmall} alt="logo" style={{width: '15em', height: '15em'}}/>
                 <br/><br/>
-                <h1>loading ...</h1> 
+                <h1>loading ...</h1><br/>
+                <button className="btn btn-lg text-white" style={{backgroundColor: "#B65DF3"}} type="submit" onClick={this.getDetails}> Get my account details </button>
             
             </div> : 
 
